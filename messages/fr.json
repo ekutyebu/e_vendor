@@ -1,0 +1,143 @@
+{
+    "nav": {
+        "home": "Accueil",
+        "vendors": "Vendeurs",
+        "products": "Produits",
+        "categories": "Catégories",
+        "signin": "Connexion",
+        "signup": "S'inscrire",
+        "dashboard": "Tableau de bord",
+        "cart": "Panier",
+        "becomeVendor": "Devenir Vendeur"
+    },
+    "hero": {
+        "badge": "🌍 La Marketplace N°1 d'Afrique Centrale",
+        "title": "Achetez Local,",
+        "titleHighlight": "Pensez Global",
+        "subtitle": "Connectez-vous avec des centaines de vendeurs locaux vérifiés. Vivres, mode, électronique et plus — livrés à votre porte.",
+        "ctaShop": "Commencer les achats",
+        "ctaVendor": "Vendre sur INOVAMARK",
+        "stats": {
+            "vendors": "500+ Vendeurs",
+            "products": "10k+ Produits",
+            "customers": "50k+ Clients",
+            "cities": "15+ Villes"
+        }
+    },
+    "categories": {
+        "title": "Acheter par Catégorie",
+        "subtitle": "Trouvez tout ce dont vous avez besoin",
+        "viewAll": "Voir toutes les catégories"
+    },
+    "featuredVendors": {
+        "title": "Vendeurs en Vedette",
+        "subtitle": "Les meilleures entreprises de confiance",
+        "viewAll": "Voir tous les vendeurs"
+    },
+    "howItWorks": {
+        "title": "Comment ça marche",
+        "subtitle": "Commencez à acheter ou vendre en 3 étapes simples",
+        "step1Title": "Parcourir et Découvrir",
+        "step1Desc": "Explorer des centaines de vendeurs locaux",
+        "step2Title": "Commander et Payer",
+        "step2Desc": "Payez avec Orange Money, Mobile Money ou Paiement à la livraison",
+        "step3Title": "Livraison Rapide",
+        "step3Desc": "Recevez votre commande à votre porte"
+    },
+    "vendorCta": {
+        "title": "Développez Votre Activité avec INOVAMARK",
+        "subtitle": "Rejoignez 500+ entrepreneurs qui vendent déjà sur notre plateforme. Zéro commission les 3 premiers mois.",
+        "cta": "Inscrivez votre entreprise",
+        "features": {
+            "free": "Inscription gratuite",
+            "tools": "Outils puissants",
+            "support": "Support 24/7",
+            "reach": "Portée nationale"
+        }
+    },
+    "testimonials": {
+        "title": "Ce que disent nos utilisateurs",
+        "subtitle": "Approuvé par des vendeurs et clients dans toute l'Afrique Centrale"
+    },
+    "footer": {
+        "tagline": "Combler le fossé numérique pour les entreprises d'Afrique Centrale.",
+        "legal": "© 2024 INOVAMARK. Tous droits réservés.",
+        "links": {
+            "about": "À propos",
+            "contact": "Contact",
+            "terms": "Conditions d'utilisation",
+            "privacy": "Politique de confidentialité"
+        }
+    },
+    "auth": {
+        "signin": "Connexion",
+        "signup": "Créer un compte",
+        "email": "Adresse e-mail",
+        "password": "Mot de passe",
+        "name": "Nom complet",
+        "phone": "Numéro de téléphone",
+        "confirmPassword": "Confirmer le mot de passe",
+        "signinBtn": "Se connecter",
+        "signupBtn": "Créer votre compte",
+        "noAccount": "Vous n'avez pas de compte ?",
+        "hasAccount": "Vous avez déjà un compte ?",
+        "forgotPassword": "Mot de passe oublié ?"
+    },
+    "vendor": {
+        "onboarding": {
+            "title": "Inscrivez votre entreprise",
+            "step1": "Infos Business",
+            "step2": "Localisation",
+            "step3": "Livraison",
+            "step4": "Détails",
+            "step5": "Logo & Docs",
+            "next": "Étape suivante",
+            "back": "Retour",
+            "submit": "Soumettre la demande"
+        }
+    },
+    "dashboard": {
+        "vendor": {
+            "overview": "Vue d'ensemble",
+            "products": "Produits",
+            "orders": "Commandes",
+            "settings": "Paramètres",
+            "totalRevenue": "Chiffre d'affaires",
+            "totalOrders": "Total commandes",
+            "totalProducts": "Total produits",
+            "pendingOrders": "Commandes en attente"
+        },
+        "admin": {
+            "overview": "Tableau de bord",
+            "vendors": "Vendeurs",
+            "categories": "Catégories",
+            "users": "Utilisateurs",
+            "totalVendors": "Total vendeurs",
+            "pendingApprovals": "Approbations en attente",
+            "totalUsers": "Total utilisateurs",
+            "totalRevenue": "Revenu total"
+        }
+    },
+    "product": {
+        "addToCart": "Ajouter au panier",
+        "outOfStock": "Rupture de stock",
+        "inStock": "En stock",
+        "reviews": "Avis",
+        "description": "Description",
+        "viewInFrench": "Voir en français",
+        "viewInEnglish": "Voir en anglais",
+        "share": "Partager",
+        "save": "Sauvegarder"
+    },
+    "order": {
+        "status": {
+            "PENDING": "En attente",
+            "CONFIRMED": "Confirmé",
+            "PROCESSING": "En cours",
+            "SHIPPED": "Expédié",
+            "DELIVERED": "Livré",
+            "CANCELLED": "Annulé",
+            "REFUNDED": "Remboursé"
+        }
+    }
+}

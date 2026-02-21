@@ -1,0 +1,143 @@
+{
+    "nav": {
+        "home": "Home",
+        "vendors": "Vendors",
+        "products": "Products",
+        "categories": "Categories",
+        "signin": "Sign In",
+        "signup": "Sign Up",
+        "dashboard": "Dashboard",
+        "cart": "Cart",
+        "becomeVendor": "Become a Vendor"
+    },
+    "hero": {
+        "badge": "🌍 Central Africa's #1 Marketplace",
+        "title": "Shop Local,",
+        "titleHighlight": "Think Global",
+        "subtitle": "Connect with hundreds of verified local vendors. Fresh produce, fashion, electronics, and more — delivered to your door.",
+        "ctaShop": "Start Shopping",
+        "ctaVendor": "Sell on INOVAMARK",
+        "stats": {
+            "vendors": "500+ Vendors",
+            "products": "10k+ Products",
+            "customers": "50k+ Customers",
+            "cities": "15+ Cities"
+        }
+    },
+    "categories": {
+        "title": "Shop by Category",
+        "subtitle": "Find everything you need from our diverse range of categories",
+        "viewAll": "View all categories"
+    },
+    "featuredVendors": {
+        "title": "Featured Vendors",
+        "subtitle": "Top-rated businesses trusted by thousands of customers",
+        "viewAll": "View all vendors"
+    },
+    "howItWorks": {
+        "title": "How It Works",
+        "subtitle": "Start shopping or selling in 3 simple steps",
+        "step1Title": "Browse & Discover",
+        "step1Desc": "Explore hundreds of local vendors and thousands of products",
+        "step2Title": "Order & Pay Securely",
+        "step2Desc": "Pay with Orange Money, Mobile Money, or Cash on Delivery",
+        "step3Title": "Fast Delivery",
+        "step3Desc": "Get your order delivered right to your doorstep"
+    },
+    "vendorCta": {
+        "title": "Grow Your Business with INOVAMARK",
+        "subtitle": "Join 500+ entrepreneurs already selling on our platform. Zero commission for the first 3 months.",
+        "cta": "Register Your Business",
+        "features": {
+            "free": "Free to join",
+            "tools": "Powerful tools",
+            "support": "24/7 support",
+            "reach": "Nationwide reach"
+        }
+    },
+    "testimonials": {
+        "title": "What Our Users Say",
+        "subtitle": "Trusted by vendors and customers across Central Africa"
+    },
+    "footer": {
+        "tagline": "Bridging the digital gap for Central African businesses.",
+        "legal": "© 2024 INOVAMARK. All rights reserved.",
+        "links": {
+            "about": "About Us",
+            "contact": "Contact",
+            "terms": "Terms of Service",
+            "privacy": "Privacy Policy"
+        }
+    },
+    "auth": {
+        "signin": "Sign In",
+        "signup": "Create Account",
+        "email": "Email address",
+        "password": "Password",
+        "name": "Full name",
+        "phone": "Phone number",
+        "confirmPassword": "Confirm password",
+        "signinBtn": "Sign in to your account",
+        "signupBtn": "Create your account",
+        "noAccount": "Don't have an account?",
+        "hasAccount": "Already have an account?",
+        "forgotPassword": "Forgot password?"
+    },
+    "vendor": {
+        "onboarding": {
+            "title": "Register Your Business",
+            "step1": "Business Info",
+            "step2": "Location",
+            "step3": "Delivery",
+            "step4": "Details",
+            "step5": "Logo & Docs",
+            "next": "Next Step",
+            "back": "Back",
+            "submit": "Submit Application"
+        }
+    },
+    "dashboard": {
+        "vendor": {
+            "overview": "Overview",
+            "products": "Products",
+            "orders": "Orders",
+            "settings": "Settings",
+            "totalRevenue": "Total Revenue",
+            "totalOrders": "Total Orders",
+            "totalProducts": "Total Products",
+            "pendingOrders": "Pending Orders"
+        },
+        "admin": {
+            "overview": "Dashboard",
+            "vendors": "Vendors",
+            "categories": "Categories",
+            "users": "Users",
+            "totalVendors": "Total Vendors",
+            "pendingApprovals": "Pending Approvals",
+            "totalUsers": "Total Users",
+            "totalRevenue": "Total Revenue"
+        }
+    },
+    "product": {
+        "addToCart": "Add to Cart",
+        "outOfStock": "Out of Stock",
+        "inStock": "In Stock",
+        "reviews": "Reviews",
+        "description": "Description",
+        "viewInFrench": "View in French",
+        "viewInEnglish": "View in English",
+        "share": "Share",
+        "save": "Save"
+    },
+    "order": {
+        "status": {
+            "PENDING": "Pending",
+            "CONFIRMED": "Confirmed",
+            "PROCESSING": "Processing",
+            "SHIPPED": "Shipped",
+            "DELIVERED": "Delivered",
+            "CANCELLED": "Cancelled",
+            "REFUNDED": "Refunded"
+        }
+    }
+}

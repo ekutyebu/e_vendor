@@ -1,0 +1,18 @@
+{
+    "buildCommand": "prisma generate && next build",
+    "installCommand": "npm install",
+    "framework": "nextjs",
+    "regions": [
+        "fra1",
+        "cdg1"
+    ],
+    "env": {
+        "DATABASE_URL": "@database_url",
+        "AUTH_SECRET": "@auth_secret",
+        "UPLOADTHING_SECRET": "@uploadthing_secret",
+        "UPLOADTHING_APP_ID": "@uploadthing_app_id",
+        "RESEND_API_KEY": "@resend_api_key",
+        "CAMPAY_USERNAME": "@campay_username",
+        "CAMPAY_PASSWORD": "@campay_password"
+    }
+}
