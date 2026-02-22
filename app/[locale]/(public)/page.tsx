@@ -1,7 +1,7 @@
 import { getLocale } from 'next-intl/server'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ChevronRight } from 'lucide-react'
+import { ChevronRight, Store } from 'lucide-react'
 import { prisma } from '@/lib/prisma'
 import ProductCard from '@/components/shared/ProductCard'
 

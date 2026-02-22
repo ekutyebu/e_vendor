@@ -30,7 +30,7 @@ export async function GET(req: NextRequest) {
         const total = await prisma.vendor.count({ where: { isActive: true } })
 
         return NextResponse.json({ vendors, total, page, pages: Math.ceil(total / limit) })
-    } catch (error) {
+    } catch {
         return NextResponse.json({ error: 'Failed to fetch vendors' }, { status: 500 })
     }
 }
@@ -72,8 +72,8 @@ export async function POST(req: NextRequest) {
         })
 
         return NextResponse.json({ success: true, vendor }, { status: 201 })
-    } catch (error: any) {
-        if (error?.code === 'P2002') {
+    } catch (error: unknown) {
+        if (error && typeof error === 'object' && 'code' in error && error.code === 'P2002') {
             return NextResponse.json({ error: 'Business name already taken' }, { status: 409 })
         }
         return NextResponse.json({ error: 'Failed to register vendor' }, { status: 500 })

@@ -33,7 +33,7 @@ export async function POST(
             vendor,
             message: `Vendor ${action === 'approve' ? 'approved' : 'rejected'} successfully`,
         })
-    } catch (error) {
+    } catch {
         return NextResponse.json({ error: 'Failed to update vendor status' }, { status: 500 })
     }
 }

@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Star, Truck, Shield, Store, Check, Lock, MapPin } from 'lucide-react'
+import { Star, Lock, MapPin } from 'lucide-react'
 import { prisma } from '@/lib/prisma'
 import { Badge } from '@/components/ui/badge'
 import { formatPrice } from '@/lib/utils'

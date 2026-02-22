@@ -30,7 +30,7 @@ export function AddToCartButton({
     text = "Add to Cart",
     size = "default"
 }: AddToCartButtonProps) {
-    const addItem = useCartStore((state: any) => state.addItem)
+    const addItem = useCartStore((state) => state.addItem)
     const isFr = locale === 'fr'
 
     const handleAddToCart = (e: React.MouseEvent) => {

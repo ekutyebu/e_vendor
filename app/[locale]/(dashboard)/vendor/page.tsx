@@ -1,7 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import {
-    TrendingUp,
     ShoppingCart,
     Package,
     DollarSign,
@@ -138,7 +137,7 @@ export default function VendorOverviewPage({ params }: { params: { locale: strin
                                 <div className="flex-1 min-w-0">
                                     <div className="flex items-center gap-2 mb-1">
                                         <span className="text-xs font-mono text-gray-500">{order.id}</span>
-                                        <Badge variant={STATUS_COLORS[order.status] as any} className="text-xs">
+                                        <Badge variant={STATUS_COLORS[order.status] as "default" | "secondary" | "destructive" | "outline"} className="text-xs">
                                             {order.status}
                                         </Badge>
                                     </div>

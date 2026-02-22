@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useTranslations, useLocale } from 'next-intl'
-import { ShoppingCart, Menu, X, Globe, Store, User, ChevronDown, Search, MapPin } from 'lucide-react'
+import { ShoppingCart, Menu, X, Store, User, ChevronDown, Search, MapPin } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { signOut } from 'next-auth/react'
@@ -11,7 +11,7 @@ import { useCartStore } from '@/lib/store/cart'
 
 function CartBadge() {
     const [mounted, setMounted] = useState(false)
-    const itemsCount = useCartStore((state: any) => state.getTotalItems())
+    const itemsCount = useCartStore((state) => state.getTotalItems())
 
     useEffect(() => {
         setMounted(true)
@@ -32,7 +32,8 @@ function CartBadge() {
     )
 }
 
-export default function Header({ user }: { user?: any }) {
+export default function Header({ user }: { user?: { name?: string | null; email?: string | null; image?: string | null; role?: string } }) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const t = useTranslations('nav')
     const locale = useLocale()
     const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -123,7 +124,7 @@ export default function Header({ user }: { user?: any }) {
                                         </span>
                                     </div>
                                     <div className="absolute right-0 top-full mt-1 w-48 bg-white text-gray-900 rounded-md shadow-xl border p-2 hidden group-hover:block transition-all z-50">
-                                        <Link href={`/${locale}/dashboard/${(user as any).role?.toLowerCase() || 'customer'}`} className="block px-3 py-2 text-sm hover:bg-gray-100 rounded">Dashboard</Link>
+                                        <Link href={`/${locale}/dashboard/${user.role?.toLowerCase() || 'customer'}`} className="block px-3 py-2 text-sm hover:bg-gray-100 rounded">Dashboard</Link>
                                         <button onClick={() => signOut()} className="block w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-gray-100 rounded">Sign Out</button>
                                     </div>
                                 </div>
@@ -194,7 +195,7 @@ export default function Header({ user }: { user?: any }) {
                                         </div>
                                         <div>
                                             <div className="font-bold">Hello, {user.name}</div>
-                                            <Link href={`/${locale}/dashboard/${(user as any).role?.toLowerCase() || 'customer'}`} className="text-xs text-orange-400">View Account</Link>
+                                            <Link href={`/${locale}/dashboard/${user.role?.toLowerCase() || 'customer'}`} className="text-xs text-orange-400">View Account</Link>
                                         </div>
                                     </>
                                 ) : (

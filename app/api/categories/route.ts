@@ -13,7 +13,7 @@ export async function GET() {
         })
 
         return NextResponse.json({ categories })
-    } catch (_error) {
+    } catch {
         return NextResponse.json({ error: 'Failed to fetch categories' }, { status: 500 })
     }
 }
@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
         })
 
         return NextResponse.json({ success: true, category }, { status: 201 })
-    } catch (_error) {
+    } catch {
         return NextResponse.json({ error: 'Failed to create category' }, { status: 500 })
     }
 }

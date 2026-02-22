@@ -76,8 +76,8 @@ export async function POST(req: NextRequest) {
         })
 
         return NextResponse.json({ success: true, product }, { status: 201 })
-    } catch (error: any) {
-        if (error?.code === 'P2002') {
+    } catch (error: unknown) {
+        if (error && typeof error === 'object' && 'code' in error && error.code === 'P2002') {
             return NextResponse.json({ error: 'SKU already exists' }, { status: 409 })
         }
         return NextResponse.json({ error: 'Failed to create product' }, { status: 500 })

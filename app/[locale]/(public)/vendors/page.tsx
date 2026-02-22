@@ -2,8 +2,7 @@ import { Search, MapPin, Star, ChevronRight, Store } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Badge } from '@/components/ui/badge'
+
 import { prisma } from '@/lib/prisma'
 
 const FILTER_CATEGORIES = [

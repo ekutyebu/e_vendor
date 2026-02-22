@@ -39,12 +39,12 @@ const initialItems = (): CartItem[] => {
                     return parsed.state.items;
                 }
             }
-        } catch (e) { }
+        } catch { }
     }
     return [];
 };
 
-let listeners: Set<() => void> = new Set();
+const listeners: Set<() => void> = new Set();
 const notify = () => listeners.forEach(l => l());
 
 let state: CartStore = {
