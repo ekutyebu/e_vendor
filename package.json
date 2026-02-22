@@ -11,7 +11,7 @@
     "db:migrate": "prisma migrate dev",
     "db:seed": "tsx prisma/seeds/seed.ts",
     "db:studio": "prisma studio",
-    "postinstall": "echo 'Skipping prisma generate'"
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.7.4",
