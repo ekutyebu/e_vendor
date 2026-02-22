@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { LayoutDashboard, Package, ShoppingCart, Settings, ArrowLeft, Store, Bell } from 'lucide-react'
+import { LayoutDashboard, Package, ShoppingCart, Settings, ArrowLeft, Store, Bell, TrendingUp } from 'lucide-react'
 
 import { Separator } from '@/components/ui/separator'
 

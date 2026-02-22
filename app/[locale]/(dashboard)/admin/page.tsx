@@ -11,6 +11,7 @@ import {
     XCircle,
     Clock,
     TrendingUp,
+    BarChart,
 } from 'lucide-react'
 
 const ADMIN_STATS = [
@@ -111,7 +112,7 @@ export default function AdminOverviewPage({ params }: { params: { locale: string
                 {[
                     { icon: Store, label: isFr ? 'Gérer vendors' : 'Manage Vendors', href: 'vendors', color: 'bg-blue-600' },
                     { icon: Users, label: isFr ? 'Gérer users' : 'Manage Users', href: 'users', color: 'bg-purple-600' },
-                    { icon: TrendingUp, label: isFr ? 'Analytiques' : 'Analytics', href: 'analytics', color: 'bg-emerald-600' },
+                    { icon: BarChart, label: isFr ? 'Analytiques' : 'Analytics', href: 'analytics', color: 'bg-emerald-600' },
                     { icon: ShoppingCart, label: isFr ? 'Toutes commandes' : 'All Orders', href: 'orders', color: 'bg-orange-600' },
                 ].map((action) => {
                     const Icon = action.icon

@@ -2,6 +2,7 @@ import NextAuth from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import { prisma } from './prisma'
+import { authConfig } from './auth.config'
 import bcrypt from 'bcryptjs'
 import { z } from 'zod'
 
@@ -11,13 +12,10 @@ const loginSchema = z.object({
 })
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+    ...authConfig,
     adapter: PrismaAdapter(prisma),
     providers: [
         Credentials({
-            credentials: {
-                email: { label: 'Email', type: 'email' },
-                password: { label: 'Password', type: 'password' },
-            },
             async authorize(credentials) {
                 const parsed = loginSchema.safeParse(credentials)
                 if (!parsed.success) return null
@@ -26,7 +24,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
                 const user = await prisma.user.findUnique({
                     where: { email },
-                    include: { customerProfile: true },
                 })
 
                 if (!user || !user.password) return null
@@ -45,30 +42,4 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             },
         }),
     ],
-    session: {
-        strategy: 'jwt',
-    },
-    callbacks: {
-        async jwt({ token, user }) {
-            if (user) {
-                token.role = (user as { role?: string }).role
-                token.language = (user as { language?: string }).language
-                token.id = user.id
-            }
-            return token
-        },
-        async session({ session, token }) {
-            if (token && session.user) {
-                session.user.id = token.id as string
-                session.user.role = token.role as string
-                session.user.language = token.language as string
-            }
-            return session
-        },
-    },
-    pages: {
-        signIn: '/signin',
-        error: '/auth/error',
-    },
-    trustHost: true,
 })
