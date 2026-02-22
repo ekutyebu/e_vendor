@@ -1,4 +1,4 @@
-import { useLocale } from 'next-intl'
+import { getLocale } from 'next-intl/server'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ChevronRight } from 'lucide-react'
@@ -6,7 +6,7 @@ import { prisma } from '@/lib/prisma'
 import ProductCard from '@/components/shared/ProductCard'
 
 export default async function HomePage() {
-    const locale = useLocale()
+    const locale = await getLocale()
     const isFr = locale === 'fr'
 
     // Fetch data from DB
