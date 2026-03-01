@@ -23,7 +23,7 @@ export default async function ProductDetailsPage({
         }
     })
 
-    if (!product || !product.isPublished) {
+    if (!product || !product.isActive) {
         notFound()
     }
 
@@ -147,7 +147,17 @@ export default async function ProductDetailsPage({
                                 {!isOutOfStock && (
                                     <div className="space-y-4 pt-2">
                                         <AddToCartButton
-                                            product={product}
+                                            product={{
+                                                id: product.id,
+                                                name: product.name,
+                                                nameFr: product.nameFr,
+                                                price: product.price,
+                                                images: product.images,
+                                                vendor: {
+                                                    id: product.vendor.id,
+                                                    businessName: product.vendor.businessName
+                                                }
+                                            }}
                                             locale={locale}
                                             fullWidth
                                             className="h-16 text-xs"

@@ -32,7 +32,7 @@ export default async function VendorsPage({
         where: {
             isActive: true,
             ...(categoryFilter && categoryFilter !== 'all' ? {
-                storeCategory: {
+                category: {
                     slug: categoryFilter
                 }
             } : {})

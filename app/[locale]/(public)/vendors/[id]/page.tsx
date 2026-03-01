@@ -23,7 +23,7 @@ export default async function VendorStorefrontPage({
             },
             category: true,
             products: {
-                where: { isPublished: true },
+                where: { isActive: true },
                 orderBy: { createdAt: 'desc' }
             }
         }

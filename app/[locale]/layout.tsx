@@ -13,6 +13,8 @@ export const metadata: Metadata = {
         "Shop from hundreds of verified local vendors across Central Africa. Pay with Orange Money, Mobile Money, or Cash on Delivery.",
 }
 
+import { Providers } from '@/components/Providers'
+
 export default async function LocaleLayout({
     children,
     params,
@@ -29,13 +31,9 @@ export default async function LocaleLayout({
     const messages = await getMessages()
 
     return (
-        <html lang={locale}>
-            <body>
-                <NextIntlClientProvider messages={messages}>
-                    {children}
-                </NextIntlClientProvider>
-            </body>
-        </html>
+        <Providers locale={locale} messages={messages}>
+            {children}
+        </Providers>
     )
 }
 

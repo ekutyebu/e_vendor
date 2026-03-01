@@ -108,7 +108,17 @@ export default function ProductCard({ product, locale }: ProductCardProps) {
                 {!isOutOfStock && (
                     <div className="pt-2 mt-auto">
                         <AddToCartButton
-                            product={product}
+                            product={{
+                                id: product.id,
+                                name: product.name,
+                                nameFr: product.nameFr,
+                                price: product.price,
+                                images: product.images,
+                                vendor: {
+                                    id: product.vendor.id,
+                                    businessName: product.vendor.businessName
+                                }
+                            }}
                             locale={locale}
                             fullWidth
                         />
