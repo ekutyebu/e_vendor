@@ -25,7 +25,9 @@ export default async function VendorsPage({
 }) {
     const locale = params.locale
     const isFr = locale === 'fr'
-    const categoryFilter = searchParams.category
+    const categoryFilter = Array.isArray(searchParams.category) 
+        ? searchParams.category[0] 
+        : searchParams.category
 
     // Fetch vendors from DB, including top 4 products for the preview
     const vendors = await prisma.vendor.findMany({
@@ -150,9 +152,9 @@ export default async function VendorsPage({
                                                 </div>
                                             </div>
                                             <Link href={`/${locale}/vendors/${vendor.id}`} className="block">
-                                                <button className="w-full h-12 rounded-2xl bg-black dark:bg-white text-white dark:text-black text-[10px] font-black uppercase tracking-widest hover:brightness-125 transition-all">
+                                                <div className="w-full h-12 rounded-2xl bg-black dark:bg-white text-white dark:text-black text-[10px] font-black uppercase tracking-widest hover:brightness-125 transition-all flex items-center justify-center">
                                                     ENTER PAVILION
-                                                </button>
+                                                </div>
                                             </Link>
                                         </div>
                                     </div>
