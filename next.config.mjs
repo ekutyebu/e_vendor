@@ -12,6 +12,8 @@ const nextConfig = {
             { protocol: 'https', hostname: 'images.unsplash.com' },
             { protocol: 'https', hostname: 'picsum.photos' },
             { protocol: 'https', hostname: 'avatars.githubusercontent.com' },
+            { protocol: 'https', hostname: 'm.media-amazon.com' },
+            { protocol: 'https', hostname: 'ae01.alicdn.com' },
         ],
     },
     experimental: {

@@ -12,24 +12,35 @@ export default async function HomePage() {
     const session = await auth()
     const user = session?.user
 
-    // Fetch elite data from DB
-    const [featuredVendors, categories, topProducts] = await Promise.all([
-        prisma.vendor.findMany({
-            where: { isActive: true },
-            include: { category: true },
-            orderBy: { rating: 'desc' },
-            take: 4
-        }),
-        prisma.category.findMany({
-            take: 12
-        }),
-        prisma.product.findMany({
-            where: { isActive: true },
-            include: { vendor: true },
-            orderBy: { rating: 'desc' },
-            take: 12
-        })
-    ])
+    // Fetch elite data from DB with stability fallbacks
+    let featuredVendors: any[] = []
+    let categories: any[] = []
+    let topProducts: any[] = []
+
+    try {
+        const [v, c, p] = await Promise.all([
+            prisma.vendor.findMany({
+                where: { isActive: true },
+                include: { category: true },
+                orderBy: { rating: 'desc' },
+                take: 4
+            }),
+            prisma.category.findMany({
+                take: 12
+            }),
+            prisma.product.findMany({
+                where: { isActive: true },
+                include: { vendor: true },
+                orderBy: { rating: 'desc' },
+                take: 12
+            })
+        ])
+        featuredVendors = v
+        categories = c
+        topProducts = p
+    } catch (error) {
+        console.error("Critical stability alert: Database fetch failed", error)
+    }
 
     return (
         <div className="bg-[#fafafa] dark:bg-[#0a0a0a] min-h-screen pb-20 font-sans selection:bg-primary selection:text-black">
