@@ -54,149 +54,137 @@ export default async function VendorsPage({
     })
 
     return (
-        <div className="bg-[#eaeded] min-h-screen py-4">
-            <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
-
-                {/* Search & Header Strip (Amazon Style) */}
-                <div className="bg-white p-4 mb-4 flex flex-col sm:flex-row items-center justify-between gap-4 border border-gray-200">
-                    <div className="flex flex-col">
-                        <h1 className="text-xl font-bold text-gray-900">
-                            {isFr ? 'Boutiques Officielles' : 'Official Storefronts'}
+        <div className="bg-[#fafafa] dark:bg-[#080808] min-h-screen pb-20">
+            {/* Elite Header Strip */}
+            <div className="bg-white dark:bg-[#111] border-b border-gray-100 dark:border-white/5 py-10 mb-12">
+                <div className="max-w-[1400px] mx-auto px-6 sm:px-10 flex flex-col md:flex-row items-end justify-between gap-8">
+                    <div className="space-y-4">
+                        <div className="inline-block text-[10px] font-black text-primary uppercase tracking-[0.4em]">DISTINGUISHED PARTNERS</div>
+                        <h1 className="text-6xl font-display font-black tracking-tighter uppercase italic leading-none text-gray-900 dark:text-white">
+                            {isFr ? 'BOUTIQUES D\'ÉLITE' : 'ELITE STOREFRONTS'}
                         </h1>
-                        <p className="text-sm text-gray-500">
-                            {isFr ? 'Découvrez des marques et boutiques locales' : 'Discover top local brands and shops'}
-                        </p>
                     </div>
-
-                    <div className="flex-1 max-w-xl w-full flex items-center gap-2">
-                        <div className="relative flex-1 flex items-center">
-                            <input
-                                type="text"
-                                placeholder={isFr ? 'Rechercher une boutique...' : 'Search stores...'}
-                                className="w-full pl-3 pr-10 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#e77600] focus:shadow-[0_0_3px_2px_rgba(228,121,17,0.5)] text-sm"
-                            />
-                            <div className="absolute right-0 top-0 bottom-0 w-12 bg-[#febd69] hover:bg-[#f3a847] flex items-center justify-center rounded-r-md cursor-pointer border border-[#febd69]">
-                                <Search className="h-5 w-5 text-gray-900" />
-                            </div>
-                        </div>
+                    
+                    <div className="w-full md:w-[400px] relative">
+                        <input
+                            type="text"
+                            placeholder={isFr ? 'RECHERCHER...' : 'SEARCH INSTITUTIONS...'}
+                            className="w-full bg-gray-100 dark:bg-white/5 border-0 rounded-2xl px-6 py-4 text-[10px] font-black uppercase tracking-widest focus:ring-2 focus:ring-primary transition-all"
+                        />
+                        <Search className="absolute right-6 top-1/2 -translate-y-1/2 w-4 h-4 text-primary" />
                     </div>
                 </div>
+            </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                    {/* Left Sidebar: Filters */}
-                    <div className="hidden lg:block lg:col-span-2">
-                        <div className="bg-white p-4 border border-gray-200">
-                            <h3 className="font-bold text-gray-900 mb-3 text-sm">Category</h3>
-                            <ul className="space-y-2 text-sm">
+            <div className="max-w-[1400px] mx-auto px-6 sm:px-10">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    {/* Left Sidebar: Elite Filters */}
+                    <div className="hidden lg:block lg:col-span-3 space-y-10">
+                        <div className="space-y-6">
+                            <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">CLASSIFICATION</h3>
+                            <div className="space-y-2">
                                 {FILTER_CATEGORIES.map((cat) => {
                                     const isActive = categoryFilter === cat.slug || (!categoryFilter && cat.slug === 'all')
                                     return (
-                                        <li key={cat.slug}>
-                                            <Link
-                                                href={`/${locale}/vendors?category=${cat.slug}`}
-                                                className={`hover:text-[#c45500] hover:underline ${isActive ? 'font-bold text-[#c45500]' : 'text-gray-900'}`}
-                                            >
-                                                {cat.name}
-                                            </Link>
-                                        </li>
+                                        <Link
+                                            key={cat.slug}
+                                            href={`/${locale}/vendors?category=${cat.slug}`}
+                                            className={`block text-[11px] font-black uppercase tracking-widest transition-all ${isActive ? 'text-primary italic translate-x-2' : 'text-gray-400 hover:text-white hover:translate-x-1'}`}
+                                        >
+                                            {cat.name}
+                                        </Link>
                                     )
                                 })}
-                            </ul>
+                            </div>
+                        </div>
 
-                            <hr className="my-4 border-gray-200" />
-
-                            <h3 className="font-bold text-gray-900 mb-3 text-sm">Customer Reviews</h3>
-                            <div className="space-y-2">
-                                <Link href="#" className="flex items-center gap-1 hover:text-[#c45500]">
-                                    <div className="flex"><Star className="w-4 h-4 fill-[#ffa41c] text-[#ffa41c]" /><Star className="w-4 h-4 fill-[#ffa41c] text-[#ffa41c]" /><Star className="w-4 h-4 fill-[#ffa41c] text-[#ffa41c]" /><Star className="w-4 h-4 fill-[#ffa41c] text-[#ffa41c]" /><Star className="w-4 h-4 text-[#ffa41c]" /></div>
-                                    <span className="text-sm text-gray-900">& Up</span>
-                                </Link>
-                                <Link href="#" className="flex items-center gap-1 hover:text-[#c45500]">
-                                    <div className="flex"><Star className="w-4 h-4 fill-[#ffa41c] text-[#ffa41c]" /><Star className="w-4 h-4 fill-[#ffa41c] text-[#ffa41c]" /><Star className="w-4 h-4 fill-[#ffa41c] text-[#ffa41c]" /><Star className="w-4 h-4 text-[#ffa41c]" /><Star className="w-4 h-4 text-[#ffa41c]" /></div>
-                                    <span className="text-sm text-gray-900">& Up</span>
-                                </Link>
+                        <div className="card-elite p-8 rounded-[2rem] dark:bg-[#111] dark:border-white/5 space-y-4">
+                            <div className="text-[10px] font-black text-white uppercase tracking-widest">ELITE STATUS</div>
+                            <div className="space-y-3">
+                                <div className="flex items-center justify-between text-[10px] font-bold text-gray-500">
+                                    <span>VERIFIED ONLY</span>
+                                    <div className="w-8 h-4 rounded-full bg-primary/20 p-1 flex justify-end">
+                                        <div className="w-2 h-2 rounded-full bg-primary shadow-[0_0_10px_primary]" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    {/* Main Content: Vendor List */}
-                    <div className="lg:col-span-10 flex flex-col gap-4">
+                    {/* Main Content: Elite Vendor List */}
+                    <div className="lg:col-span-9 space-y-8">
                         {vendors.map((vendor) => (
-                            <div key={vendor.id} className="bg-white border border-gray-200 hover:shadow-sm transition-shadow">
-                                <div className="flex flex-col md:flex-row p-4 gap-6">
-
-                                    {/* Vendor Info Details (Left) */}
-                                    <div className="flex items-start gap-4 md:w-1/3 shrink-0 border-b md:border-b-0 md:border-r border-gray-100 pb-4 md:pb-0 pr-4">
-                                        {/* Logo */}
-                                        <div className="w-20 h-20 shrink-0 border border-gray-200 rounded-full flex items-center justify-center bg-gray-50 overflow-hidden relative">
-                                            {vendor.logo ? (
-                                                <Image src={vendor.logo} alt={vendor.businessName} fill className="object-cover" />
-                                            ) : (
-                                                <Store className="w-8 h-8 text-gray-400" />
-                                            )}
+                            <div key={vendor.id} className="group relative overflow-hidden rounded-[3rem] bg-white dark:bg-[#111] border border-gray-100 dark:border-white/5 hover:border-primary/30 transition-all duration-500">
+                                <div className="flex flex-col xl:flex-row">
+                                    {/* Brand Identity */}
+                                    <div className="p-10 xl:w-[350px] shrink-0 border-b xl:border-b-0 xl:border-r border-gray-100 dark:border-white/5 flex flex-col">
+                                        <div className="flex items-center gap-6 mb-8">
+                                            <div className="relative w-20 h-20 rounded-3xl bg-black overflow-hidden border border-white/10 shadow-2xl p-2 shrink-0">
+                                                <div className="relative w-full h-full rounded-2xl overflow-hidden">
+                                                    <Image src={vendor.logo || '/images/vendor-placeholder.png'} alt={vendor.businessName} fill className="object-cover" />
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <Link href={`/${locale}/vendors/${vendor.id}`}>
+                                                    <h2 className="text-xl font-display font-black tracking-tighter uppercase italic text-gray-900 dark:text-white group-hover:text-primary transition-colors">
+                                                        {vendor.businessName}
+                                                    </h2>
+                                                </Link>
+                                                <div className="flex items-center gap-2 text-[10px] font-black text-primary uppercase tracking-widest mt-1">
+                                                    <MapPin className="w-3 h-3" /> {vendor.city}
+                                                </div>
+                                            </div>
                                         </div>
 
-                                        {/* Info */}
-                                        <div className="flex flex-col h-full justify-center">
-                                            <Link href={`/${locale}/vendors/${vendor.id}`} className="hover:underline">
-                                                <h2 className="text-lg font-bold text-[#007185] hover:text-[#c45500] leading-tight mb-1">
-                                                    {vendor.businessName}
-                                                </h2>
-                                            </Link>
-
-                                            <div className="flex items-center gap-1 text-sm text-gray-600 mb-1">
-                                                <MapPin className="w-3.5 h-3.5" />
-                                                <span>{vendor.city}</span>
-                                            </div>
-
-                                            <div className="flex items-center gap-1 mb-2">
-                                                <div className="flex">
-                                                    {[1, 2, 3, 4, 5].map((star) => (
-                                                        <Star key={star} className={`w-3.5 h-3.5 ${star <= Math.round(vendor.rating) ? 'fill-[#ffa41c] text-[#ffa41c]' : 'fill-transparent text-[#ffa41c]'}`} />
-                                                    ))}
+                                        <div className="space-y-6 mt-auto">
+                                            <div className="flex items-center gap-6">
+                                                <div className="space-y-1">
+                                                    <div className="text-[9px] font-black text-gray-500 uppercase tracking-widest">RATING</div>
+                                                    <div className="flex items-center gap-1 font-black text-white">
+                                                        <Star className="w-3 h-3 fill-primary text-primary" /> {vendor.rating.toFixed(1)}
+                                                    </div>
                                                 </div>
-                                                <span className="text-xs text-[#007185] ml-1">{vendor.totalReviews}</span>
+                                                <div className="space-y-1">
+                                                    <div className="text-[9px] font-black text-gray-500 uppercase tracking-widest">ASSETS</div>
+                                                    <div className="font-black text-white uppercase text-[10px]">{vendor._count.products} ITEMS</div>
+                                                </div>
                                             </div>
-
-                                            <Link href={`/${locale}/vendors/${vendor.id}`} className="mt-auto">
-                                                <Button variant="outline" size="sm" className="h-8 text-xs font-semibold rounded shadow-sm border-gray-300 bg-gray-50 hover:bg-gray-100 mt-2">
-                                                    {isFr ? 'Visiter la boutique' : 'Visit Storefront'}
-                                                </Button>
+                                            <Link href={`/${locale}/vendors/${vendor.id}`} className="block">
+                                                <button className="w-full h-12 rounded-2xl bg-black dark:bg-white text-white dark:text-black text-[10px] font-black uppercase tracking-widest hover:brightness-125 transition-all">
+                                                    ENTER PAVILION
+                                                </button>
                                             </Link>
                                         </div>
                                     </div>
 
-                                    {/* Top Products Showcase (Right) */}
-                                    <div className="flex-1 flex flex-col justify-center">
-                                        <div className="flex items-center justify-between mb-2">
-                                            <span className="text-xs font-bold text-gray-900 uppercase tracking-wide">
-                                                {isFr ? 'Meilleurs Produits' : 'Featured Items'}
-                                            </span>
-                                            <Link href={`/${locale}/vendors/${vendor.id}`} className="text-xs text-[#007185] hover:text-[#c45500] hover:underline flex items-center">
-                                                {isFr ? 'Voir tout' : 'See all'} <ChevronRight className="w-3 h-3" />
+                                    {/* Assets Preview */}
+                                    <div className="p-10 flex-grow">
+                                        <div className="flex items-center justify-between mb-8">
+                                            <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">PREMIER RELEASES</span>
+                                            <Link href={`/${locale}/vendors/${vendor.id}`} className="text-[10px] font-black text-primary uppercase tracking-widest flex items-center gap-2 group-hover:translate-x-1 transition-transform">
+                                                VIEW ALL <ChevronRight className="w-3 h-3" />
                                             </Link>
                                         </div>
 
-                                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                                            {vendor.products && vendor.products.length > 0 ? (
-                                                vendor.products.map(product => (
-                                                    <Link key={product.id} href={`/${locale}/products/${product.id}`} className="group block border border-transparent hover:border-gray-200 p-1 transition-colors rounded">
-                                                        <div className="aspect-square bg-[#f7f7f7] relative rounded overflow-hidden mb-2">
-                                                            <Image
-                                                                src={product.images[0] || '/images/product-placeholder.png'}
-                                                                alt={isFr ? product.nameFr : product.name}
-                                                                fill
-                                                                className="object-contain mix-blend-multiply group-hover:scale-105 transition-transform"
-                                                            />
-                                                        </div>
-                                                        <div className="text-[11px] text-[#007185] group-hover:text-[#c45500] group-hover:underline line-clamp-2 leading-tight flex-grow">
-                                                            {isFr ? product.nameFr : product.name}
-                                                        </div>
-                                                    </Link>
-                                                ))
-                                            ) : (
-                                                <div className="col-span-4 flex items-center justify-center p-6 bg-gray-50 text-sm text-gray-500 italic border border-dashed border-gray-200 rounded">
-                                                    {isFr ? 'Aucun produit publié.' : 'No items published yet.'}
+                                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+                                            {vendor.products.map(product => (
+                                                <Link key={product.id} href={`/${locale}/products/${product.id}`} className="group/item block space-y-3">
+                                                    <div className="aspect-square rounded-2xl bg-gray-50 dark:bg-black/40 overflow-hidden relative border border-transparent group-item-hover:border-primary/20 transition-all p-2">
+                                                        <Image
+                                                            src={product.images[0] || '/images/product-placeholder.png'}
+                                                            alt={isFr ? product.nameFr : product.name}
+                                                            fill
+                                                            className="object-contain group-hover/item:scale-110 transition-transform duration-700 p-2"
+                                                        />
+                                                    </div>
+                                                    <div className="text-[9px] font-black uppercase tracking-widest text-gray-400 group-hover/item:text-white transition-colors line-clamp-1">
+                                                        {isFr ? product.nameFr : product.name}
+                                                    </div>
+                                                </Link>
+                                            ))}
+                                            {vendor.products.length === 0 && (
+                                                <div className="col-span-full h-24 rounded-2xl border border-dashed border-gray-100 dark:border-white/5 flex items-center justify-center text-[10px] font-black text-gray-500 uppercase tracking-widest">
+                                                    PREPARING RELEASES...
                                                 </div>
                                             )}
                                         </div>
@@ -204,15 +192,8 @@ export default async function VendorsPage({
                                 </div>
                             </div>
                         ))}
-
-                        {vendors.length === 0 && (
-                            <div className="py-12 text-center text-gray-500 bg-white border border-gray-200">
-                                {isFr ? "Aucun vendeur trouvé pour cette catégorie." : "No vendors found for this category."}
-                            </div>
-                        )}
                     </div>
                 </div>
-
             </div>
         </div>
     )

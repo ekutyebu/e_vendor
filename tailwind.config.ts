@@ -118,7 +118,8 @@ module.exports = {
                 'pulse-slow': 'pulse-slow 3s ease-in-out infinite',
             },
             fontFamily: {
-                sans: ['var(--font-geist-sans)', 'Inter', 'system-ui', 'sans-serif'],
+                sans: ['var(--font-inter)', 'Inter', 'system-ui', 'sans-serif'],
+                display: ['var(--font-outfit)', 'Outfit', 'system-ui', 'sans-serif'],
                 mono: ['var(--font-geist-mono)', 'monospace'],
             },
             backgroundImage: {

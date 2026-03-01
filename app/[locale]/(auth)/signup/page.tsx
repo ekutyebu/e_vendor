@@ -59,81 +59,85 @@ export default function SignUpPage() {
     }
 
     return (
-        <Card className="border-0 shadow-2xl bg-white/95 backdrop-blur-sm">
-            <CardHeader className="text-center pb-2">
-                <CardTitle className="text-2xl font-bold">
-                    {isFr ? 'Créer un compte' : 'Create your account'}
-                </CardTitle>
-                <CardDescription>
-                    {isFr ? 'Rejoignez INOVAMARK gratuitement' : 'Join INOVAMARK — it\'s free'}
-                </CardDescription>
-            </CardHeader>
-
-            <CardContent className="pt-4">
-                {error && (
-                    <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-600">
-                        {error}
-                    </div>
-                )}
-
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                    <div className="space-y-1.5">
-                        <Label htmlFor="name">{isFr ? 'Nom complet' : 'Full name'}</Label>
-                        <div className="relative">
-                            <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-                            <Input id="name" placeholder={isFr ? 'Jean Dupont' : 'John Doe'} className="pl-9" {...register('name')} />
-                        </div>
-                        {errors.name && <p className="text-xs text-red-500">{errors.name.message}</p>}
-                    </div>
-
-                    <div className="space-y-1.5">
-                        <Label htmlFor="email">{isFr ? 'Adresse e-mail' : 'Email address'}</Label>
-                        <div className="relative">
-                            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-                            <Input id="email" type="email" placeholder="you@example.com" className="pl-9" {...register('email')} />
-                        </div>
-                        {errors.email && <p className="text-xs text-red-500">{errors.email.message}</p>}
-                    </div>
-
-                    <div className="space-y-1.5">
-                        <Label htmlFor="phone">{isFr ? 'Téléphone (optionnel)' : 'Phone (optional)'}</Label>
-                        <div className="relative">
-                            <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-                            <Input id="phone" type="tel" placeholder="+237 6XX XXX XXX" className="pl-9" {...register('phone')} />
-                        </div>
-                    </div>
-
-                    <div className="space-y-1.5">
-                        <Label htmlFor="password">{isFr ? 'Mot de passe' : 'Password'}</Label>
-                        <div className="relative">
-                            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-                            <Input id="password" type="password" placeholder="••••••••" className="pl-9" {...register('password')} />
-                        </div>
-                        {errors.password && <p className="text-xs text-red-500">{errors.password.message}</p>}
-                    </div>
-
-                    <div className="space-y-1.5">
-                        <Label htmlFor="confirmPassword">{isFr ? 'Confirmer le mot de passe' : 'Confirm password'}</Label>
-                        <div className="relative">
-                            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-                            <Input id="confirmPassword" type="password" placeholder="••••••••" className="pl-9" {...register('confirmPassword')} />
-                        </div>
-                        {errors.confirmPassword && <p className="text-xs text-red-500">{errors.confirmPassword.message}</p>}
-                    </div>
-
-                    <Button type="submit" className="w-full gradient-brand text-white" disabled={isLoading}>
-                        {isLoading ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <ArrowRight className="h-4 w-4 mr-2" />}
-                        {isFr ? 'Créer votre compte' : 'Create your account'}
-                    </Button>
-                </form>
-
-                <p className="text-center text-sm text-gray-500 mt-5">
-                    {isFr ? 'Vous avez déjà un compte ?' : 'Already have an account?'}{' '}
-                    <Link href={`/${locale}/signin`} className="text-blue-600 font-medium hover:underline">
-                        {isFr ? 'Se connecter' : 'Sign in'}
-                    </Link>
+        <div className="card-elite p-12 rounded-[3rem] dark:bg-[#111] dark:border-white/5 shadow-3xl">
+            <div className="text-center mb-10">
+                <div className="w-16 h-16 gold-gradient rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-primary/20">
+                    <User className="w-8 h-8 text-black" />
+                </div>
+                <h1 className="text-4xl font-display font-black tracking-tighter italic uppercase mb-2">
+                    {isFr ? 'REJOINDRE LA GUILDE' : 'JOIN THE GUILD'}
+                </h1>
+                <p className="text-xs font-black text-gray-400 uppercase tracking-widest">
+                    {isFr ? 'Créez votre identité INOVAMARK' : 'Create your INOVAMARK identity'}
                 </p>
-            </CardContent>
-        </Card>
+            </div>
+
+            {error && (
+                <div className="mb-8 p-4 bg-red-500/10 border border-red-500/20 rounded-2xl text-xs font-black uppercase tracking-widest text-red-500 text-center">
+                    {error}
+                </div>
+            )}
+
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                        <Label htmlFor="name" className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 ml-4">{isFr ? 'Nom Complet' : 'Full Name'}</Label>
+                        <div className="relative">
+                            <User className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-primary" />
+                            <Input id="name" placeholder="John Doe" className="pl-12 h-14 rounded-2xl bg-gray-50 dark:bg-white/5 border-gray-100 dark:border-white/5 focus:border-primary/50 transition-all font-bold" {...register('name')} />
+                        </div>
+                        {errors.name && <p className="text-[10px] text-red-500 font-bold ml-4">{errors.name.message}</p>}
+                    </div>
+
+                    <div className="space-y-2">
+                        <Label htmlFor="phone" className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 ml-4">{isFr ? 'Téléphone' : 'Phone'}</Label>
+                        <div className="relative">
+                            <Phone className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-primary" />
+                            <Input id="phone" type="tel" placeholder="+237 ..." className="pl-12 h-14 rounded-2xl bg-gray-50 dark:bg-white/5 border-gray-100 dark:border-white/5 focus:border-primary/50 transition-all font-bold" {...register('phone')} />
+                        </div>
+                    </div>
+                </div>
+
+                <div className="space-y-2">
+                    <Label htmlFor="email" className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 ml-4">{isFr ? 'Identité (Email)' : 'Identity (Email)'}</Label>
+                    <div className="relative">
+                        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-primary" />
+                        <Input id="email" type="email" placeholder="elite@inovamark.cm" className="pl-12 h-14 rounded-2xl bg-gray-50 dark:bg-white/5 border-gray-100 dark:border-white/5 focus:border-primary/50 transition-all font-bold" {...register('email')} />
+                    </div>
+                    {errors.email && <p className="text-[10px] text-red-500 font-bold ml-4">{errors.email.message}</p>}
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                        <Label htmlFor="password" className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 ml-4">{isFr ? 'Code d\'Accès' : 'Access Code'}</Label>
+                        <div className="relative">
+                            <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-primary" />
+                            <Input id="password" type="password" placeholder="••••••••" className="pl-12 h-14 rounded-2xl bg-gray-50 dark:bg-white/5 border-gray-100 dark:border-white/5 focus:border-primary/50 transition-all" {...register('password')} />
+                        </div>
+                        {errors.password && <p className="text-[10px] text-red-500 font-bold ml-4">{errors.password.message}</p>}
+                    </div>
+
+                    <div className="space-y-2">
+                        <Label htmlFor="confirmPassword" className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 ml-4">{isFr ? 'Confirmation' : 'Confirmation'}</Label>
+                        <div className="relative">
+                            <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-primary" />
+                            <Input id="confirmPassword" type="password" placeholder="••••••••" className="pl-12 h-14 rounded-2xl bg-gray-50 dark:bg-white/5 border-gray-100 dark:border-white/5 focus:border-primary/50 transition-all" {...register('confirmPassword')} />
+                        </div>
+                        {errors.confirmPassword && <p className="text-[10px] text-red-500 font-bold ml-4">{errors.confirmPassword.message}</p>}
+                    </div>
+                </div>
+
+                <Button type="submit" className="w-full h-14 rounded-2xl gold-gradient text-black font-black uppercase tracking-[0.2em] text-xs shadow-xl shadow-primary/20 hover:scale-[1.02] transition-all" disabled={isLoading}>
+                    {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <><ArrowRight className="h-4 w-4 mr-2" /> {isFr ? 'CRÉER L\'IDENTITÉ' : 'CREATE IDENTITY'}</>}
+                </Button>
+            </form>
+
+            <p className="text-center text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 mt-10">
+                {isFr ? 'Déjà membre ?' : 'Already a member?'}{' '}
+                <Link href={`/${locale}/signin`} className="text-primary hover:brightness-125 ml-2">
+                    {isFr ? 'SE CONNECTER' : 'LOG IN'}
+                </Link>
+            </p>
+        </div>
     )
 }

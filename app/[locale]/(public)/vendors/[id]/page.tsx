@@ -34,133 +34,133 @@ export default async function VendorStorefrontPage({
     }
 
     return (
-        <div className="min-h-screen bg-[#eaeded] pb-20">
-
-            {/* Amazon Style Store Header / Banner */}
-            <div className="bg-white border-b border-gray-300 shadow-sm relative z-10">
-                <div className="max-w-[1500px] mx-auto">
-                    {/* Banner Image Placeholder */}
-                    <div className="h-32 md:h-48 bg-gray-900 relative overflow-hidden group">
-                        {/* Could be an actual banner image, using a pattern for now */}
-                        <div className="absolute inset-0 opacity-40 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-repeat" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-
-                        <div className="absolute bottom-4 left-4 sm:left-6 lg:left-8 flex items-end gap-4 z-10">
-                            <div className="w-20 h-20 sm:w-24 sm:h-24 bg-white rounded shadow-md overflow-hidden border-2 border-white shrink-0 flex items-center justify-center">
-                                {vendor.storeLogo ? (
-                                    <Image src={vendor.storeLogo} alt={vendor.storeName} width={96} height={96} className="object-cover w-full h-full" />
-                                ) : (
-                                    <Store className="w-10 h-10 text-gray-400" />
-                                )}
-                            </div>
-                            <div className="pb-1 text-white">
-                                <h1 className="text-2xl sm:text-3xl font-bold tracking-tight drop-shadow-md">
-                                    {vendor.storeName}
-                                </h1>
-                                <div className="flex items-center gap-2 mt-1 text-sm text-gray-200">
-                                    <Badge variant="outline" className="border-gray-400 text-gray-200 bg-black/30 hover:bg-black/50 transition-colors">
-                                        {vendor.storeCategory?.name || 'Store'}
-                                    </Badge>
-                                    <div className="flex items-center text-[#ffa41c]">
-                                        <Star className="w-4 h-4 fill-current mr-1 text-[#ffa41c]" />
-                                        <span className="font-bold">{vendor.rating.toFixed(1)}</span>
-                                        <span className="text-gray-300 font-normal ml-1">({vendor.totalReviews} ratings)</span>
-                                    </div>
-                                    <div className="hidden sm:flex items-center text-emerald-400 font-medium">
-                                        <Check className="w-4 h-4 mr-0.5" /> Verified Brand
-                                    </div>
-                                </div>
-                            </div>
+        <div className="min-h-screen bg-[#fafafa] dark:bg-[#080808] pb-20">
+            {/* Elite Cinematic Hero Section */}
+            <div className="relative h-[400px] overflow-hidden bg-black flex items-center justify-center">
+                <div className="absolute inset-0 gold-gradient opacity-30" />
+                <div className="absolute inset-0 bg-[url('/images/noise.png')] opacity-20" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+                
+                <div className="relative z-10 text-center space-y-6 max-w-4xl px-6">
+                    <div className="inline-block px-6 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-black uppercase tracking-[0.4em] backdrop-blur-xl">
+                        ELITE INSTITUTION
+                    </div>
+                    <h1 className="text-7xl font-display font-black tracking-tighter uppercase italic leading-[0.8] text-white">
+                        {vendor.businessName}
+                    </h1>
+                    <div className="flex items-center justify-center gap-8 pt-4">
+                        <div className="flex items-center gap-2">
+                            <Star className="w-4 h-4 fill-primary text-primary" />
+                            <span className="text-sm font-black text-white">{vendor.rating.toFixed(1)}</span>
+                            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">({vendor.totalReviews} RATINGS)</span>
+                        </div>
+                        <div className="h-4 w-px bg-white/10" />
+                        <div className="flex items-center gap-2 text-[10px] font-black text-emerald-500 uppercase tracking-widest">
+                            <Check className="w-4 h-4" /> VERIFIED BRAND
                         </div>
                     </div>
+                </div>
 
-                    {/* Store Navbar */}
-                    <div className="flex items-center justify-between px-4 sm:px-6 lg:px-8 h-12 border-b border-gray-200 bg-white">
-                        <nav className="flex space-x-1 sm:space-x-4 overflow-x-auto scrollbar-hide h-full">
-                            <Link href="#" className="flex items-center px-2 h-full border-b-2 border-[#e77600] text-[#e77600] font-bold text-sm whitespace-nowrap">
-                                {isFr ? 'Accueil' : 'Home'}
-                            </Link>
-                            <Link href="#" className="flex items-center px-2 h-full border-b-2 border-transparent text-gray-700 hover:text-[#e77600] hover:border-gray-300 font-medium text-sm whitespace-nowrap transition-colors">
-                                {isFr ? 'Tous les produits' : 'All Products'}
-                            </Link>
-                            <Link href="#" className="flex items-center px-2 h-full border-b-2 border-transparent text-gray-700 hover:text-[#e77600] hover:border-gray-300 font-medium text-sm whitespace-nowrap transition-colors">
-                                {isFr ? 'À propos' : 'About'}
-                            </Link>
-                            <Link href="#" className="flex items-center px-2 h-full border-b-2 border-transparent text-gray-700 hover:text-[#e77600] hover:border-gray-300 font-medium text-sm whitespace-nowrap transition-colors">
-                                {isFr ? 'Avis' : 'Reviews'}
-                            </Link>
-                        </nav>
+                {/* Brand Mark */}
+                <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 w-32 h-32 rounded-[2rem] bg-black border-4 border-[#fafafa] dark:border-[#080808] shadow-2xl overflow-hidden p-2">
+                    <div className="relative w-full h-full rounded-2xl bg-white/5 overflow-hidden">
+                        <Image src={vendor.logo || '/images/vendor-placeholder.png'} alt={vendor.businessName} fill className="object-cover" />
+                    </div>
+                </div>
+            </div>
 
-                        <div className="hidden md:flex items-center relative">
+            {/* Elite Navbar / Buffer */}
+            <div className="pt-24 pb-12 border-b border-gray-100 dark:border-white/5 bg-white dark:bg-[#111]">
+                <div className="max-w-[1400px] mx-auto px-6 sm:px-10 flex flex-wrap items-center justify-between gap-8">
+                    <nav className="flex gap-10">
+                        {['COLLECTIONS', 'ABOUT', 'REVIEWS', 'STORY'].map((item) => (
+                            <button key={item} className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400 hover:text-primary transition-all relative group">
+                                {item}
+                                <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
+                            </button>
+                        ))}
+                    </nav>
+                    <div className="flex items-center gap-4">
+                        <div className="relative">
                             <input
                                 type="text"
-                                placeholder={isFr ? 'Rechercher dans cette boutique...' : 'Search in this store...'}
-                                className="pl-3 pr-8 py-1 border border-gray-300 rounded focus:outline-none focus:border-[#e77600] focus:shadow-[0_0_3px_2px_rgba(228,121,17,0.5)] text-sm w-48 lg:w-64"
+                                placeholder="SEARCH ARCHIVE..."
+                                className="bg-gray-100 dark:bg-white/5 border-0 rounded-xl px-6 py-3 text-[9px] font-black uppercase tracking-widest w-[250px] focus:ring-1 focus:ring-primary"
                             />
-                            <Search className="h-4 w-4 text-gray-500 absolute right-2" />
+                            <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-3 h-3 text-primary" />
                         </div>
                     </div>
                 </div>
             </div>
 
-            {/* Store Content */}
-            <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 mt-6">
-
-                <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-
-                    {/* Left Sidebar (Desktop Only) */}
-                    <div className="hidden lg:block lg:col-span-1">
-                        <div className="bg-white border border-gray-300 p-4 sticky top-4">
-                            <h3 className="font-bold text-gray-900 mb-2 border-b border-gray-200 pb-2">
-                                {isFr ? 'À propos de cette boutique' : 'About this Store'}
-                            </h3>
-                            <p className="text-sm text-gray-600 mb-4 leading-relaxed">
-                                {vendor.storeDescription || (isFr ? 'Aucune description fournie.' : 'No description provided.')}
+            {/* Main Showroom */}
+            <div className="max-w-[1400px] mx-auto px-6 sm:px-10 mt-16">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+                    {/* Dossier Sidebar */}
+                    <div className="lg:col-span-3 space-y-10">
+                        <div className="space-y-6">
+                            <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">DOSSIER</h3>
+                            <p className="text-[11px] font-bold text-gray-500 leading-relaxed uppercase tracking-widest italic">
+                                {vendor.description || "The story of this institution is currently being archived."}
                             </p>
-
-                            <div className="space-y-3 text-sm text-gray-600 border-t border-gray-200 pt-3">
-                                <div className="flex items-start gap-2">
-                                    <MapPin className="w-4 h-4 text-gray-400 shrink-0 mt-0.5" />
-                                    <span>{vendor.address}</span>
+                            <div className="space-y-4 pt-4 border-t border-white/5">
+                                <div className="space-y-1">
+                                    <div className="text-[8px] font-black text-gray-400 uppercase tracking-widest">ORIGIN</div>
+                                    <div className="flex items-center gap-2 text-[10px] font-black text-white uppercase">
+                                        <MapPin className="w-3 h-3 text-primary" /> {vendor.city}
+                                    </div>
                                 </div>
-                                <div className="flex items-center gap-2">
-                                    <Phone className="w-4 h-4 text-gray-400 shrink-0" />
-                                    <span>{vendor.phone}</span>
+                                <div className="space-y-1 border-t border-white/5 pt-4">
+                                    <div className="text-[8px] font-black text-gray-400 uppercase tracking-widest">COMMUNICATION</div>
+                                    <div className="flex items-center gap-2 text-[10px] font-black text-white uppercase">
+                                        <Phone className="w-3 h-3 text-primary" /> {vendor.phone || "STRICTLY DIGITAL"}
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
+                        <div className="card-elite p-8 rounded-[2rem] dark:bg-[#111] dark:border-white/5 space-y-4">
+                            <div className="text-[10px] font-black text-white uppercase tracking-widest">LOYALTY PROGRAM</div>
+                            <p className="text-[9px] font-bold text-gray-500 uppercase leading-relaxed tracking-widest">
+                                Join the {vendor.businessName} elite circle for priority releases.
+                            </p>
+                            <button className="w-full h-10 rounded-xl bg-primary text-black text-[9px] font-black uppercase tracking-widest hover:brightness-125 transition-all">
+                                SUBSCRIBE
+                            </button>
+                        </div>
                     </div>
 
-                    {/* Main Products Grid */}
-                    <div className="lg:col-span-3">
-                        <div className="bg-white p-4 mb-4 border border-gray-200 flex items-center justify-between">
-                            <h2 className="text-lg font-bold text-gray-900">
-                                {isFr ? 'Tous les produits' : 'All Products'} <span className="text-gray-500 text-sm font-normal">({vendor.products.length})</span>
+                    {/* Collection Grid */}
+                    <div className="lg:col-span-9 space-y-8">
+                        <div className="flex items-center justify-between">
+                            <h2 className="text-3xl font-display font-black tracking-tighter uppercase italic text-gray-900 dark:text-white">
+                                {isFr ? 'LA COLLECTION' : 'THE COLLECTION'}
+                                <span className="text-gray-400 text-sm font-bold ml-4 tracking-normal not-italic uppercase">({vendor.products.length} ASSETS)</span>
                             </h2>
-                            <Button variant="outline" size="sm" className="hidden sm:flex text-sm">
-                                {isFr ? 'Trier par : En vedette' : 'Sort by: Featured'}
-                            </Button>
+                            <div className="flex items-center gap-3">
+                                <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">SORT BY:</span>
+                                <Badge className="bg-white/5 border border-white/10 text-primary text-[9px] font-black rounded-lg px-3">SIGNATURE</Badge>
+                            </div>
                         </div>
 
                         {vendor.products.length > 0 ? (
-                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+                            <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-6">
                                 {vendor.products.map(product => (
                                     <ProductCard key={product.id} product={product} locale={locale} />
                                 ))}
                             </div>
                         ) : (
-                            <div className="py-20 text-center bg-white border border-gray-200">
-                                <Store className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-                                <h3 className="text-lg font-medium text-gray-900 mb-1">
-                                    {isFr ? 'Aucun produit trouvé' : 'No products found'}
-                                </h3>
-                                <p className="text-gray-500 text-sm">
-                                    {isFr ? 'Ce vendeur n\'a pas encore publié de produits.' : 'This seller hasn\'t published any products yet.'}
-                                </p>
+                            <div className="py-32 rounded-[3rem] border border-dashed border-gray-100 dark:border-white/5 flex flex-col items-center justify-center gap-6">
+                                <Store className="w-16 h-16 text-gray-200" />
+                                <div className="text-center space-y-2">
+                                    <h3 className="text-lg font-black text-white uppercase tracking-widest">CURATING ASSETS</h3>
+                                    <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest leading-relaxed">
+                                        This institution is currently curating their next premier release.
+                                    </p>
+                                </div>
                             </div>
                         )}
                     </div>
-
                 </div>
             </div>
         </div>

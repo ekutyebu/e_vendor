@@ -1,6 +1,7 @@
 'use client'
 
-import { ShoppingCart } from 'lucide-react'
+import { useState } from 'react'
+import { ShoppingCart, Check } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useCartStore } from '@/lib/store/cart'
 
@@ -31,6 +32,7 @@ export function AddToCartButton({
     size = "default"
 }: AddToCartButtonProps) {
     const addItem = useCartStore((state) => state.addItem)
+    const [isAdded, setIsAdded] = useState(false)
     const isFr = locale === 'fr'
 
     const handleAddToCart = (e: React.MouseEvent) => {
@@ -46,17 +48,32 @@ export function AddToCartButton({
             vendorName: product.vendor.businessName,
             quantity: 1
         })
+        
+        setIsAdded(true)
+        setTimeout(() => setIsAdded(false), 2000)
     }
 
     return (
         <Button
             variant={variant}
             size={size}
-            className={`${className} ${fullWidth ? 'w-full' : ''}`}
+            className={`${className} ${fullWidth ? 'w-full' : ''} !rounded-2xl font-black uppercase tracking-widest text-[10px] shadow-lg transition-all duration-300 transform active:scale-95 ${
+                isAdded 
+                ? "bg-green-500 hover:bg-green-600 !text-white" 
+                : "gold-gradient text-black hover:brightness-110 hover:shadow-primary/40 border-0"
+            }`}
             onClick={handleAddToCart}
         >
-            <ShoppingCart className={size === "icon" ? "w-5 h-5" : "w-4 h-4 mr-2"} />
-            {size !== "icon" && (isFr && text === "Add to Cart" ? "Ajouter au panier" : text)}
+            {isAdded ? (
+                <span className="flex items-center gap-2">
+                    <Check className="w-4 h-4 ml-1" /> {isFr ? "SÉCURISÉ" : "SECURED"}
+                </span>
+            ) : (
+                <span className="flex items-center gap-2">
+                    <ShoppingCart className={size === "icon" ? "w-4 h-4" : "w-3 h-3 ml-1"} />
+                    {size !== "icon" && (isFr && text === "Add to Cart" ? "ACQUÉRIR" : text.toUpperCase())}
+                </span>
+            )}
         </Button>
     )
 }
