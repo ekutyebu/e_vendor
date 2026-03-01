@@ -38,7 +38,7 @@ export default async function VendorsPage({
             } : {})
         },
         include: {
-            storeCategory: true,
+            category: true,
             products: {
                 where: { isActive: true },
                 take: 4,

@@ -22,6 +22,7 @@ export default async function VendorStorefrontPage({
                 select: { name: true, email: true }
             },
             storeCategory: true,
+            category: true,
             products: {
                 where: { isPublished: true },
                 orderBy: { createdAt: 'desc' }
