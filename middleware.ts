@@ -6,7 +6,7 @@ import type { NextRequest } from 'next/server'
 import { routing } from './i18n/routing'
 
 const intlMiddleware = createMiddleware(routing)
-const { auth } = NextAuth(authConfig)
+// const { auth } = NextAuth(authConfig)
 
 const protectedRoutes = ['/vendor', '/admin', '/customer']
 const adminRoutes = ['/admin']
