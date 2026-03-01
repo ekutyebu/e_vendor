@@ -33,7 +33,8 @@ export default auth((req) => {
             return NextResponse.redirect(new URL(`/${locale}/signin`, req.url))
         }
 
-        const userRole = req.auth?.user?.role
+        const user = req.auth?.user as { role?: string } | undefined
+        const userRole = user?.role
 
         const isAdminRoute = adminRoutes.some((route) =>
             localeFreePathname.startsWith(`/dashboard${route}`)

@@ -21,7 +21,6 @@ export default async function VendorStorefrontPage({
             user: {
                 select: { name: true, email: true }
             },
-            storeCategory: true,
             category: true,
             products: {
                 where: { isPublished: true },
