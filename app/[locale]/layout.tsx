@@ -13,13 +13,13 @@ export const metadata: Metadata = {
         "Shop from hundreds of verified local vendors across Central Africa. Pay with Orange Money, Mobile Money, or Cash on Delivery.",
 }
 
-export default async function LocaleLayout(
-    props: {
-        children: React.ReactNode
-        params: Promise<{ locale: string }>
-    }
-) {
-    const params = await props.params;
+export default async function LocaleLayout({
+    children,
+    params,
+}: {
+    children: React.ReactNode
+    params: { locale: string }
+}) {
     const locale = params.locale;
 
     if (!routing.locales.includes(locale as 'en' | 'fr')) {
