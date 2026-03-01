@@ -1,7 +1,7 @@
 import { getLocale } from 'next-intl/server'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ChevronRight, Store, Sparkles, TrendingUp, ShieldCheck, Globe } from 'lucide-react'
+import { ChevronRight, Store, Sparkles, TrendingUp, ShieldCheck, Globe, ArrowRight } from 'lucide-react'
 import { prisma } from '@/lib/prisma'
 import ProductCard from '@/components/shared/ProductCard'
 import { auth } from '@/lib/auth'
@@ -59,7 +59,7 @@ export default async function HomePage() {
                             <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-black text-white leading-[0.9] tracking-tighter italic">
                                 {user ? (
                                     <>
-                                        {isFr ? 'RE-BIENVENUE,' : 'WELCOME BACK,'} <br/><span className="text-primary">{user.name?.split(' ')[0].toUpperCase()}</span>
+                                        {isFr ? 'RE-BIENVENUE,' : 'WELCOME BACK,'} <br/><span className="text-primary">{(user.name?.split(' ')[0] || '').toUpperCase()}</span>
                                     </>
                                 ) : (
                                     <>
