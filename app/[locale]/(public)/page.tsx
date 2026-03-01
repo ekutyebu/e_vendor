@@ -13,7 +13,7 @@ export default async function HomePage() {
     const [featuredVendors, categories, topProducts] = await Promise.all([
         prisma.vendor.findMany({
             where: { isActive: true },
-            include: { storeCategory: true },
+            include: { category: true },
             orderBy: { rating: 'desc' },
             take: 4
         }),
