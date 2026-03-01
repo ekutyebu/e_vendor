@@ -2,10 +2,10 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { useParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Loader2, Mail, Lock, User, Phone, ArrowRight } from 'lucide-react'
+import { Loader2, Mail, Lock, User, Phone, ArrowRight, Store } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -15,8 +15,11 @@ import { signIn } from 'next-auth/react'
 
 export default function SignUpPage() {
     const params = useParams()
+    const searchParams = useSearchParams()
     const locale = params.locale as string
     const isFr = locale === 'fr'
+    const roleParam = searchParams.get('role')?.toUpperCase() === 'VENDOR' ? 'VENDOR' : 'CUSTOMER'
+    
     const [error, setError] = useState<string | null>(null)
     const [isLoading, setIsLoading] = useState(false)
 
@@ -36,7 +39,13 @@ export default function SignUpPage() {
             const res = await fetch('/api/auth/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name: data.name, email: data.email, password: data.password, phone: data.phone }),
+                body: JSON.stringify({ 
+                    name: data.name, 
+                    email: data.email, 
+                    password: data.password, 
+                    phone: data.phone,
+                    role: roleParam
+                }),
             })
 
             const json = await res.json()
@@ -49,7 +58,7 @@ export default function SignUpPage() {
             await signIn('credentials', {
                 email: data.email,
                 password: data.password,
-                callbackUrl: `/${locale}/dashboard/customer`,
+                callbackUrl: `/${locale}/dashboard/${roleParam.toLowerCase()}`,
             })
         } catch {
             setError(isFr ? 'Une erreur est survenue' : 'An error occurred')
@@ -62,13 +71,17 @@ export default function SignUpPage() {
         <div className="card-elite p-12 rounded-[3rem] dark:bg-[#111] dark:border-white/5 shadow-3xl">
             <div className="text-center mb-10">
                 <div className="w-16 h-16 gold-gradient rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-primary/20">
-                    <User className="w-8 h-8 text-black" />
+                    {roleParam === 'VENDOR' ? <Store className="w-8 h-8 text-black" /> : <User className="w-8 h-8 text-black" />}
                 </div>
                 <h1 className="text-4xl font-display font-black tracking-tighter italic uppercase mb-2">
-                    {isFr ? 'REJOINDRE LA GUILDE' : 'JOIN THE GUILD'}
+                    {roleParam === 'VENDOR' 
+                        ? (isFr ? 'DEVENIR VENDEUR' : 'BECOME A VENDOR')
+                        : (isFr ? 'REJOINDRE LA GUILDE' : 'JOIN THE GUILD')}
                 </h1>
                 <p className="text-xs font-black text-gray-400 uppercase tracking-widest">
-                    {isFr ? 'Créez votre identité INOVAMARK' : 'Create your INOVAMARK identity'}
+                    {roleParam === 'VENDOR'
+                        ? (isFr ? 'Lancez votre boutique sur INOVAMARK' : 'Launch your shop on INOVAMARK')
+                        : (isFr ? 'Créez votre identité INOVAMARK' : 'Create your INOVAMARK identity')}
                 </p>
             </div>
 

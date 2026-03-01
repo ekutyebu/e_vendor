@@ -34,6 +34,7 @@ export default function VendorDashboardLayout({
         { icon: LayoutDashboard, label: isFr ? 'Vue d\'ensemble' : 'Overview', href: `/${locale}/dashboard/vendor` },
         { icon: Package, label: isFr ? 'Produits' : 'Products', href: `/${locale}/dashboard/vendor/products` },
         { icon: ShoppingCart, label: isFr ? 'Commandes' : 'Orders', href: `/${locale}/dashboard/vendor/orders` },
+        { icon: Sparkles, label: isFr ? 'Promotions' : 'Promotions', href: `/${locale}/dashboard/vendor/promotions` },
         { icon: TrendingUp, label: isFr ? 'Analytique' : 'Analytics', href: `/${locale}/dashboard/vendor/analytics` },
         { icon: Settings, label: isFr ? 'Paramètres' : 'Settings', href: `/${locale}/dashboard/vendor/settings` },
     ]
