@@ -17,7 +17,16 @@ const nextConfig = {
         ],
     },
     experimental: {
-        serverComponentsExternalPackages: ['@prisma/client', 'bcryptjs'],
+        serverComponentsExternalPackages: [
+            '@prisma/client',
+            'bcryptjs',
+            'ws',
+            'bufferutil',
+            'utf-8-validate',
+            '@neondatabase/serverless',
+            '@prisma/adapter-neon',
+            'twilio',
+        ],
     },
     eslint: {
         ignoreDuringBuilds: true,
