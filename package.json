@@ -9,7 +9,7 @@
     "lint": "next lint",
     "db:push": "prisma db push",
     "db:migrate": "prisma migrate dev",
-    "db:seed": "tsx prisma/seeds/seed.ts",
+    "db:seed": "tsx --env-file=.env prisma/seeds/seed.ts",
     "db:studio": "prisma studio",
     "postinstall": "prisma generate"
   },
