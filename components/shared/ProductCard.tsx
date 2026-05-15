@@ -23,9 +23,11 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product, locale }: ProductCardProps) {
-    const displayName = locale === 'fr' ? product.nameFr : product.name
+    const displayName = locale === 'fr' ? (product.nameFr || product.name) : product.name
     const discount = product.compareAtPrice ? calculateDiscount(product.price, product.compareAtPrice) : 0
     const isOutOfStock = product.stock === 0
+    // Guard: some products may have no vendor (orphaned data)
+    const vendor = product.vendor ?? { id: '', businessName: 'INOVAMARK' }
 
     return (
         <div className="group flex flex-col bg-white dark:bg-[#111] rounded-[2rem] overflow-hidden relative border border-gray-100 dark:border-white/5 hover:border-primary/50 hover:shadow-2xl transition-all duration-500">
@@ -65,9 +67,15 @@ export default function ProductCard({ product, locale }: ProductCardProps) {
             {/* Elite Info Section */}
             <div className="p-6 flex flex-col flex-grow space-y-4">
                 <div className="space-y-1">
-                    <Link href={`/${locale}/vendors/${product.vendor.id}`} className="text-[10px] font-black text-primary uppercase tracking-[0.2em] hover:brightness-125 transition-all">
-                        {product.vendor.businessName}
-                    </Link>
+                    {vendor.id ? (
+                        <Link href={`/${locale}/vendors/${vendor.id}`} className="text-[10px] font-black text-primary uppercase tracking-[0.2em] hover:brightness-125 transition-all">
+                            {vendor.businessName}
+                        </Link>
+                    ) : (
+                        <span className="text-[10px] font-black text-primary uppercase tracking-[0.2em]">
+                            {vendor.businessName}
+                        </span>
+                    )}
                     <Link href={`/${locale}/products/${product.id}`} className="block">
                         <h3 className="text-sm font-black leading-tight line-clamp-2 uppercase tracking-tight group-hover:text-primary transition-colors">
                             {displayName}
@@ -115,8 +123,8 @@ export default function ProductCard({ product, locale }: ProductCardProps) {
                                 price: product.price,
                                 images: product.images,
                                 vendor: {
-                                    id: product.vendor.id,
-                                    businessName: product.vendor.businessName
+                                    id: vendor.id,
+                                    businessName: vendor.businessName
                                 }
                             }}
                             locale={locale}
