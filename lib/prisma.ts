@@ -4,6 +4,16 @@ import { Pool, neonConfig } from '@neondatabase/serverless'
 import ws from 'ws'
 
 // Allow Neon to work in local environments with WebSockets (bypasses port 5432)
+// Load environment variables manually for standalone scripts (tsx)
+try {
+    // @ts-ignore - loadEnvFile is available in Node 20.12+ / 22+
+    if (typeof process.loadEnvFile === 'function') {
+        process.loadEnvFile('.env')
+    }
+} catch (e) {
+    // Ignore if .env is missing or already loaded
+}
+
 neonConfig.webSocketConstructor = ws
 
 const globalForPrisma = globalThis as unknown as {
