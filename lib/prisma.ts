@@ -30,9 +30,16 @@ if (!connectionString) {
 const normalizedConnectionString = connectionString.replace('postgresql://', 'postgres://')
 
 // Neon pool occasionally reads from process.env.DATABASE_URL automatically as a fallback.
-process.env.DATABASE_URL = normalizedConnectionString
-
-const pool = new Pool({ connectionString: normalizedConnectionString })
+// Parse the URL manually to avoid Neon driver parsing issues
+const url = new URL(normalizedConnectionString)
+const pool = new Pool({ 
+    host: url.hostname,
+    user: url.username,
+    password: url.password,
+    database: url.pathname.slice(1),
+    port: url.port ? parseInt(url.port) : 5432,
+    ssl: true,
+})
 const adapter = new PrismaNeon(pool)
 
 export const prisma =
