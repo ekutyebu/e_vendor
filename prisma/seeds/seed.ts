@@ -1,3 +1,11 @@
+// Absolute top of the file to ensure environment is loaded before ANY imports
+try {
+    // @ts-ignore
+    if (typeof process.loadEnvFile === 'function') {
+        process.loadEnvFile('.env')
+    }
+} catch (e) {}
+
 import { OrderStatus, PaymentStatus, PaymentMethod } from '@prisma/client'
 import { prisma } from '../../lib/prisma'
 import bcrypt from 'bcryptjs'
