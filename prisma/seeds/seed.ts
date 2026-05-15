@@ -1,7 +1,6 @@
-import { PrismaClient, OrderStatus, PaymentStatus, PaymentMethod } from '@prisma/client'
+import { OrderStatus, PaymentStatus, PaymentMethod } from '@prisma/client'
+import { prisma } from '../../lib/prisma'
 import bcrypt from 'bcryptjs'
-
-const prisma = new PrismaClient()
 
 async function main() {
     console.log('🌱 Seeding INOVAMARK database with Elite Assets...')
