@@ -62,10 +62,10 @@ export default function Header({
     }, [])
 
     const megaMenuLinks = [
-        { label: locale === 'fr' ? 'Soldes du jour' : "Today's Deals", href: `/${locale}/vendors` },
+        { label: locale === 'fr' ? 'Soldes du jour' : "Today's Deals", href: `/${locale}/deals` },
         { label: locale === 'fr' ? 'Boutiques' : 'Storefronts', href: `/${locale}/vendors` },
         { label: locale === 'fr' ? 'Vendre sur INOVAMARK' : 'Sell on INOVAMARK', href: `/${locale}/become-vendor` },
-        { label: locale === 'fr' ? 'Service Client' : 'Customer Service', href: `#` },
+        { label: locale === 'fr' ? 'Service Client' : 'Customer Service', href: `/${locale}/contact` },
     ]
 
     if (!mounted) return null
@@ -157,9 +157,9 @@ export default function Header({
                                         <div className="w-1/2 p-6 border-r border-gray-100">
                                             <h3 className="text-base font-black uppercase tracking-tighter mb-4 text-[#131921]">Your Lists</h3>
                                             <div className="space-y-2.5">
-                                                <Link href="#" className="block text-[13px] hover:text-orange-600 hover:underline">Create a List</Link>
-                                                <Link href="#" className="block text-[13px] hover:text-orange-600 hover:underline">Find a List or Registry</Link>
-                                                <Link href="#" className="block text-[13px] hover:text-orange-600 hover:underline">Marketplace Gifting</Link>
+                                                <Link href={`/${locale}/dashboard/customer`} className="block text-[13px] hover:text-orange-600 hover:underline">Create a List</Link>
+                                                <Link href={`/${locale}/dashboard/customer`} className="block text-[13px] hover:text-orange-600 hover:underline">Find a List or Registry</Link>
+                                                <Link href={`/${locale}/vendors`} className="block text-[13px] hover:text-orange-600 hover:underline">Marketplace Gifting</Link>
                                             </div>
                                         </div>
                                         {/* Right Side: Account */}
@@ -169,8 +169,8 @@ export default function Header({
                                                 {user ? (
                                                     <>
                                                         <Link href={`/${locale}/dashboard/${user.role?.toLowerCase() || 'customer'}`} className="block text-[13px] hover:text-orange-600 hover:underline">Dashboard</Link>
-                                                        <Link href="#" className="block text-[13px] hover:text-orange-600 hover:underline">Orders</Link>
-                                                        <Link href="#" className="block text-[13px] hover:text-orange-600 hover:underline">Recommendations</Link>
+                                                        <Link href={`/${locale}/dashboard/customer/orders`} className="block text-[13px] hover:text-orange-600 hover:underline">Orders</Link>
+                                                        <Link href={`/${locale}/new`} className="block text-[13px] hover:text-orange-600 hover:underline">Recommendations</Link>
                                                         <div className="h-px bg-gray-200 my-2" />
                                                         <button onClick={() => signOut()} className="flex items-center gap-2 text-[13px] text-red-600 font-bold hover:underline">
                                                             <LogOut className="w-3 h-3" /> Sign Out
@@ -193,7 +193,7 @@ export default function Header({
                             </div>
 
                             {/* Returns & Orders */}
-                            <Link href="#" className="hidden sm:flex flex-col px-3 py-1.5 hover:outline hover:outline-1 hover:outline-white rounded transition-all leading-tight">
+                            <Link href={`/${locale}/dashboard/customer/orders`} className="hidden sm:flex flex-col px-3 py-1.5 hover:outline hover:outline-1 hover:outline-white rounded transition-all leading-tight">
                                 <span className="text-[11px] text-gray-400">Returns</span>
                                 <span className="text-sm font-bold">& Orders</span>
                             </Link>
@@ -275,9 +275,9 @@ export default function Header({
                             <div>
                                 <h3 className="px-4 text-lg font-black uppercase tracking-tighter text-gray-900 dark:text-white mb-2">Trending</h3>
                                 <div className="space-y-1">
-                                    <Link href="#" className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-white/5 rounded-lg text-sm transition-colors">Best Sellers</Link>
-                                    <Link href="#" className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-white/5 rounded-lg text-sm transition-colors">New Releases</Link>
-                                    <Link href="#" className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-white/5 rounded-lg text-sm transition-colors">Movers & Shakers</Link>
+                                    <Link href={`/${locale}/deals`} className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-white/5 rounded-lg text-sm transition-colors" onClick={() => setIsMegaMenuOpen(false)}>Best Sellers</Link>
+                                    <Link href={`/${locale}/new`} className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-white/5 rounded-lg text-sm transition-colors" onClick={() => setIsMegaMenuOpen(false)}>New Releases</Link>
+                                    <Link href={`/${locale}/deals`} className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-white/5 rounded-lg text-sm transition-colors" onClick={() => setIsMegaMenuOpen(false)}>Movers & Shakers</Link>
                                 </div>
                             </div>
 
@@ -310,12 +310,12 @@ export default function Header({
                             <div>
                                 <h3 className="px-4 text-lg font-black uppercase tracking-tighter text-gray-900 dark:text-white mb-2">Help & Settings</h3>
                                 <div className="space-y-1">
-                                    <Link href={`/${locale}/dashboard/customer`} className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-white/5 rounded-lg text-sm">Your Account</Link>
-                                    <Link href={`/${otherLocale}`} className="flex items-center gap-2 px-4 py-3 hover:bg-gray-100 dark:hover:bg-white/5 rounded-lg text-sm">
+                                    <Link href={`/${locale}/dashboard/customer`} className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-white/5 rounded-lg text-sm" onClick={() => setIsMegaMenuOpen(false)}>Your Account</Link>
+                                    <Link href={`/${otherLocale}`} className="flex items-center gap-2 px-4 py-3 hover:bg-gray-100 dark:hover:bg-white/5 rounded-lg text-sm" onClick={() => setIsMegaMenuOpen(false)}>
                                         <Globe className="w-4 h-4" />
                                         {otherLocale === 'fr' ? 'Français' : 'English'}
                                     </Link>
-                                    <Link href="#" className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-white/5 rounded-lg text-sm">Customer Service</Link>
+                                    <Link href={`/${locale}/contact`} className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-white/5 rounded-lg text-sm" onClick={() => setIsMegaMenuOpen(false)}>Customer Service</Link>
                                     {user && (
                                         <button 
                                             onClick={() => signOut()}

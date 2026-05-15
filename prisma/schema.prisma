@@ -20,6 +20,7 @@ model User {
   role          UserRole  @default(CUSTOMER)
   language      Language  @default(ENGLISH)
   emailVerified DateTime?
+  phoneVerified DateTime?
   image         String?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
@@ -66,6 +67,22 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model VerificationOTP {
+  id         String   @id @default(cuid())
+  identifier String   // Email or Phone number
+  code       String   // 6-digit code
+  type       OTPType
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+
+  @@unique([identifier, type])
+}
+
+enum OTPType {
+  EMAIL
+  PHONE
 }
 
 model Vendor {

@@ -52,13 +52,13 @@ export default function Footer() {
                         {/* Elite Socials */}
                         <div className="flex gap-4">
                             {[Facebook, Instagram, Twitter].map((Icon, i) => (
-                                <a
+                                <Link
                                     key={i}
-                                    href="#"
+                                    href={`/${locale}/contact`}
                                     className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-primary hover:text-black hover:-translate-y-1 transition-all duration-300"
                                 >
                                     <Icon className="w-5 h-5" />
-                                </a>
+                                </Link>
                             ))}
                         </div>
                     </div>
