@@ -16,9 +16,8 @@ const connectionString = (process.env.PROD_DATABASE_URL || process.env.DATABASE_
 // Ensure DATABASE_URL is available for the adapter and engine internals
 process.env.DATABASE_URL = connectionString
 
-// Use the HTTP driver instead of WebSockets/Pool to bypass the connection string parsing bug
-const sql = neon(connectionString)
-const adapter = new PrismaNeonHTTP(sql)
+// In Prisma 6, the adapter factory takes the connection string directly, NOT the instantiated sql function
+const adapter = new PrismaNeonHTTP(connectionString)
 
 export const prisma =
     globalThis.prisma ||
