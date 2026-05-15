@@ -1,5 +1,13 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { Resend } from 'resend'
+import twilio from 'twilio'
+
+// Initialize SDKs
+const resend = new Resend(process.env.RESEND_API_KEY)
+const twilioClient = twilio(process.env.TWILIO_API_KEY, process.env.TWILIO_API_SECRET, { 
+    accountSid: process.env.TWILIO_ACCOUNT_SID 
+})
 
 export async function POST(req: Request) {
     try {
@@ -33,16 +41,34 @@ export async function POST(req: Request) {
             },
         })
 
-        // 🔥 MOCK SYSTEM FOR NOW - Print to console
-        console.log('\n=============================================')
-        console.log(`🔐 MOCK ${type} VERIFICATION CODE GENERATED`)
-        console.log(`📡 To: ${identifier}`)
-        console.log(`🔑 Code: ${code}`)
-        console.log('=============================================\n')
+        // Dispatch Real Communication
+        if (type === 'EMAIL') {
+            await resend.emails.send({
+                from: 'INOVAMARK Security <onboarding@resend.dev>', // Resend test domain
+                to: identifier,
+                subject: 'Your INOVAMARK Verification Code',
+                html: `
+                    <div style="font-family: sans-serif; text-align: center; padding: 20px;">
+                        <h2 style="color: #000;">INOVAMARK Security</h2>
+                        <p>Your identity verification code is:</p>
+                        <h1 style="color: #ff6600; letter-spacing: 5px; font-size: 32px;">${code}</h1>
+                        <p style="color: #666; font-size: 12px;">This code will expire in 15 minutes.</p>
+                    </div>
+                `
+            })
+        } else if (type === 'PHONE') {
+            await twilioClient.messages.create({
+                body: `Your INOVAMARK security code is: ${code}`,
+                from: process.env.TWILIO_PHONE_NUMBER || '+1234567890', // User needs to set this in .env
+                to: identifier
+            })
+        }
+
+        console.log(`✅ DISPATCHED REAL ${type} OTP TO ${identifier}`)
 
         return NextResponse.json({ success: true, message: 'Verification code sent successfully' })
-    } catch (error) {
-        console.error('OTP Send Error:', error)
-        return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    } catch (error: any) {
+        console.error('OTP Send Error:', error?.message || error)
+        return NextResponse.json({ error: 'Failed to dispatch verification code' }, { status: 500 })
     }
 }
