@@ -1,15 +1,14 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
-import { Resend } from 'resend'
-import twilio from 'twilio'
-
-// Initialize SDKs
-const resend = new Resend(process.env.RESEND_API_KEY)
-const twilioClient = twilio(process.env.TWILIO_API_KEY, process.env.TWILIO_API_SECRET, { 
-    accountSid: process.env.TWILIO_ACCOUNT_SID 
-})
 
 export async function POST(req: Request) {
+    // Lazy-initialize SDKs inside handler so build-time env var absence doesn't crash
+    const { Resend } = await import('resend')
+    const twilio = (await import('twilio')).default
+    const resend = new Resend(process.env.RESEND_API_KEY)
+    const twilioClient = twilio(process.env.TWILIO_API_KEY, process.env.TWILIO_API_SECRET, {
+        accountSid: process.env.TWILIO_ACCOUNT_SID
+    })
     try {
         const { identifier, type } = await req.json()
 

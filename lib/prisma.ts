@@ -1,39 +1,32 @@
 import { PrismaClient } from '@prisma/client'
-import { PrismaNeon } from '@prisma/adapter-neon'
-import { neonConfig } from '@neondatabase/serverless'
-import ws from 'ws'
 
-// Allow Neon to work in local environments with WebSockets (bypasses port 5432)
-neonConfig.webSocketConstructor = ws
+// Standard Prisma Client — uses TCP connection (port 5432) reliable in Node.js runtime.
+// schema.prisma uses PROD_DATABASE_URL directly, so Prisma auto-picks it up.
+// We also alias it to DATABASE_URL for compatibility with any third-party tooling.
 
-// Load environment variables manually for standalone scripts (tsx)
-try {
-    // @ts-ignore
-    if (typeof process.loadEnvFile === 'function') {
-        process.loadEnvFile('.env')
-        console.log('✅ .env file loaded successfully via native Node.js')
-    }
-} catch (e) {}
+const prodUrl = process.env.PROD_DATABASE_URL || process.env.DATABASE_URL || ''
 
-const connectionString = (process.env.PROD_DATABASE_URL || process.env.DATABASE_URL || '').trim()
+// Make sure DATABASE_URL is always set (some Prisma internals expect it)
+if (prodUrl && !process.env.DATABASE_URL) {
+    process.env.DATABASE_URL = prodUrl
+}
 
-// Ensure DATABASE_URL is available for the adapter and engine internals
-process.env.DATABASE_URL = connectionString
-
-// In Prisma 6, PrismaNeon takes the PoolConfig directly to handle Pool creation internally!
-const adapter = new PrismaNeon({ connectionString })
-
-export const prisma =
-    globalThis.prisma ||
-    new PrismaClient({
-        adapter,
-        log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error'],
+function createPrismaClient() {
+    return new PrismaClient({
+        log: process.env.NODE_ENV === 'development' ? ['error', 'warn'] : ['error'],
     })
+}
 
-if (process.env.NODE_ENV !== 'production') globalThis.prisma = prisma
+// Prevent hot-reload from creating multiple instances in development
+const globalForPrisma = globalThis as unknown as {
+    prisma: PrismaClient | undefined
+}
+
+export const prisma = globalForPrisma.prisma ?? createPrismaClient()
+
+if (process.env.NODE_ENV !== 'production') {
+    globalForPrisma.prisma = prisma
+}
 
 export default prisma
 
-declare global {
-    var prisma: PrismaClient | undefined
-}
