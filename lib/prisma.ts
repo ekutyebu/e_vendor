@@ -28,15 +28,11 @@ if (!connectionString) {
     console.log('🔗 Database connection string found (length:', connectionString.length, ')')
 }
 
-// Force standard postgres protocol and strip query parameters (like sslmode=require)
-const normalizedConnectionString = connectionString
-    .replace('postgresql://', 'postgres://')
-    .split('?')[0] // Neon serverless driver sometimes chokes on query parameters
+// Ensure DATABASE_URL is available for the adapter and engine internals
+process.env.DATABASE_URL = connectionString
 
-// Neon pool occasionally reads from process.env.DATABASE_URL automatically as a fallback.
-// Parse the URL manually to avoid Neon driver parsing issues
-// Use standard connectionString property
-const pool = new Pool({ connectionString: normalizedConnectionString })
+// In test-db.ts, passing the raw connectionString directly worked perfectly!
+const pool = new Pool({ connectionString })
 const adapter = new PrismaNeon(pool)
 
 export const prisma =
