@@ -14,8 +14,8 @@ async function main() {
     console.log('🌱 Seeding INOVAMARK database with Elite Assets...')
 
     // ── CATEGORIES ──────────────────────────────────────────────
-    const categories = await Promise.all([
-        prisma.category.upsert({
+    const categoryInputs = [
+        {
             where: { slug: 'food-grocery' },
             update: {},
             create: { 
@@ -27,8 +27,8 @@ async function main() {
                 image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=1200&q=80', 
                 description: 'Fresh food, produce and grocery items' 
             },
-        }),
-        prisma.category.upsert({
+        },
+        {
             where: { slug: 'fashion' },
             update: {},
             create: { 
@@ -40,8 +40,8 @@ async function main() {
                 image: 'https://images.unsplash.com/photo-1445205170230-053b83016050?w=1200&q=80', 
                 description: 'Clothing, shoes and accessories' 
             },
-        }),
-        prisma.category.upsert({
+        },
+        {
             where: { slug: 'electronics' },
             update: {},
             create: { 
@@ -53,8 +53,13 @@ async function main() {
                 image: 'https://images.unsplash.com/photo-1498049794561-7780e7231661?w=1200&q=80', 
                 description: 'Smartphones, computers and gadgets' 
             },
-        }),
-    ])
+        }
+    ]
+
+    const categories = []
+    for (const input of categoryInputs) {
+        categories.push(await prisma.category.upsert(input))
+    }
 
     // ── VENDORS ────────────────────────────────────────────────
     const vendorPassword = await bcrypt.hash('Vendor@2024!', 12)
