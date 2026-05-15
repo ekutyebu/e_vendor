@@ -1,29 +1,28 @@
-# INOVAMARK — Multi-Vendor Marketplace
+# INOVAMARK — Elite E-Commerce Architecture
 
-> Central Africa's premier multi-vendor e-commerce platform. Connecting local businesses with customers across Cameroon and the region.
+> Central Africa's premier multi-vendor e-commerce platform. Engineered with enterprise-grade security, lightning-fast dynamic rendering, and seamless cross-border logistics.
 
-## ✨ Features
+## ✨ Elite Features
 
-- 🌍 **Bilingual** — English & French (next-intl)
-- 🏪 **Multi-Vendor** — Vendor registration with admin approval workflow
-- 💳 **Local Payments** — Orange Money, MTN Mobile Money, Cash on Delivery (via Campay)
-- 📱 **Mobile-First** — Responsive design optimized for mobile browsing
-- 🔐 **Auth** — NextAuth.js v5 with role-based access (Admin / Vendor / Customer)
-- 📦 **Full Dashboard** — Vendor product management + Order tracking
-- 🔍 **Search & Filter** — By category, city, name
+- 🌍 **Bilingual Native** — English & French (next-intl)
+- 🔐 **Dual-Factor Authentication (2FA)** — Mandatory Email and SMS verification for all accounts
+- 🏪 **Multi-Vendor Ecosystem** — Vendor registration with strict admin approval workflow
+- 💳 **Local & Global Payments** — Orange Money, MTN Mobile Money, Cash on Delivery (via Campay)
+- 📱 **Mobile-First Excellence** — Premium responsive design with skeleton loaders and dynamic suspense
+- 🛡️ **Role-Based Dashboards** — Segregated, ultra-secure profiles for Admins, Vendors, and Customers
+- 📦 **Global Logistics** — Haversine-based delivery routing algorithms
 
 ## 🛠 Tech Stack
 
-| Layer | Tech |
+| Layer | Technology |
 |-------|------|
-| Framework | Next.js 14 (App Router) |
-| Language | TypeScript |
-| Database | PostgreSQL |
-| ORM | Prisma |
-| Styling | Tailwind CSS + Shadcn/UI |
-| Auth | NextAuth.js v5 |
-| i18n | next-intl |
-| Payments | Campay (Orange Money / MoMo) |
+| **Core Framework** | Next.js 14 (App Router, Server Actions) |
+| **Language** | TypeScript (Strict Mode) |
+| **Database** | Neon Serverless PostgreSQL |
+| **ORM** | Prisma 6.19 (WebSocket Pools via `@neondatabase/serverless`) |
+| **Styling** | Tailwind CSS + Shadcn/UI |
+| **Authentication** | NextAuth.js v5 + Custom OTP Verification |
+| **i18n** | next-intl |
 
 ## 🚀 Getting Started
 
@@ -35,18 +34,23 @@ npm install
 ### 2. Set up environment variables
 ```bash
 cp .env.example .env.local
-# Fill in your values (see .env.example for reference)
 ```
+Ensure you have the following Elite keys configured:
+- `PROD_DATABASE_URL` (Neon Serverless Connection String)
+- `AUTH_SECRET` (For NextAuth session encryption)
+- `CAMPAY_USERNAME` & `CAMPAY_PASSWORD`
+- `RESEND_API_KEY` (For Email 2FA)
+- `TWILIO_ACCOUNT_SID` & `TWILIO_AUTH_TOKEN` (For SMS 2FA)
 
-### 3. Set up the database
+### 3. Initialize the Database
 ```bash
-# Push the schema to your PostgreSQL database
-npm run db:push
+# Push the schema via TCP (Requires port 5432)
+npx prisma db push
 
-# OR run migrations
-npm run db:migrate
+# Generate Prisma Client (WebSocket ready)
+npx prisma generate
 
-# Seed with sample data
+# Seed the database sequentially
 npm run db:seed
 ```
 
@@ -55,81 +59,63 @@ npm run db:seed
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000)
+## 🔒 Confidentiality & Security Protocols
 
-## 🧪 Test Accounts (after seeding)
+This system handles sensitive financial and user identity data. 
+- All passwords are encrypted via `bcrypt` (12 rounds).
+- **No administrative bypass exists**. All admin access requires 2FA validation via authorized mobile devices.
+- Neon Database connections use `sslmode=require` and WebSocket WSS encryption.
+
+## 🧪 Demo Credentials (Development Only)
+
+> **WARNING:** Do not use these accounts in a production environment.
 
 | Role | Email | Password |
 |------|-------|----------|
-| Admin | admin@inovamark.cm | Admin@2024! |
-| Vendor | marche.bio@gmail.com | Vendor@2024! |
-| Vendor | elegance.boutique@gmail.com | Vendor@2024! |
-| Customer | customer@example.cm | Customer@2024! |
+| **Super Admin** | `admin@inovamark.cm` | `Admin@2024!` |
+| **Master Vendor** | `marche.bio@gmail.com` | `Vendor@2024!` |
+| **Elite Customer**| `customer@example.cm` | `Customer@2024!` |
 
-## 📁 Project Structure
+*(Note: During development, the 2FA OTP codes are printed directly to the server terminal. In production, they are dispatched via Twilio/Resend).*
+
+## 📁 Elite Project Architecture
 
 ```
 e-vendor/
 ├── app/
 │   ├── [locale]/
-│   │   ├── (public)/      # Landing, vendors, products
-│   │   ├── (auth)/        # signin, signup, become-vendor
-│   │   └── (dashboard)/
-│   │       ├── vendor/    # Vendor dashboard
-│   │       ├── admin/     # Admin panel
-│   │       └── customer/  # Customer account
-│   └── api/               # REST API routes
+│   │   ├── (public)/      # Storefront (Home, Deals, Categories, Products)
+│   │   ├── (auth)/        # Registration & OTP 2FA Flows
+│   │   └── (dashboard)/   # Segregated Secure Zones
+│   │       ├── admin/     # Super Admin Control Center
+│   │       ├── vendor/    # Merchant Hub & Inventory
+│   │       └── customer/  # Shopper Profile & Orders
+│   └── api/               # Serverless Route Handlers
 ├── components/
-│   ├── ui/                # Shadcn components
-│   └── shared/            # Header, Footer, Cards
+│   ├── ui/                # Shadcn primitives (Skeletons, Buttons)
+│   └── shared/            # Mega Menu Header, Footer, Under Construction
 ├── lib/
-│   ├── auth.ts            # NextAuth config
-│   ├── prisma.ts          # DB client
-│   ├── delivery.ts        # Haversine delivery calculator
-│   └── payments/          # Campay integration
+│   ├── auth.ts            # Security configurations
+│   ├── prisma.ts          # Edge-compatible DB client
+│   └── payments/          # Transaction handlers
 ├── messages/
 │   ├── en.json            # English translations
 │   └── fr.json            # French translations
 └── prisma/
-    ├── schema.prisma      # DB schema
-    └── seeds/seed.ts      # Seed data
+    └── schema.prisma      # DB schema (Includes OTP models)
 ```
 
-## 💰 Payment Integration
+## 🌐 Enterprise Deployment (Vercel)
 
-Payments use [Campay](https://docs.campay.net) as the aggregator:
-
-1. Set `CAMPAY_USERNAME` and `CAMPAY_PASSWORD` in `.env.local`
-2. Point webhook URL to `/api/payments/webhook`
-3. The webhook updates order status on payment confirmation
-
-## 🌐 Deployment (Vercel)
+Ensure Vercel is configured to bypass build cache for database actions.
 
 ```bash
-# Install Vercel CLI
-npm i -g vercel
-
-# Deploy
 vercel --prod
 ```
 
-Required environment variables in Vercel dashboard:
-- `DATABASE_URL`
+Required Production Environment Variables:
+- `PROD_DATABASE_URL`
+- `PROD_DATABASE_URL_UNPOOLED`
 - `AUTH_SECRET`
-- `UPLOADTHING_SECRET` + `UPLOADTHING_APP_ID`
-- `CAMPAY_USERNAME` + `CAMPAY_PASSWORD`
-- `RESEND_API_KEY`
-
-## 📝 API Routes
-
-| Method | Route | Description | Auth |
-|--------|-------|-------------|------|
-| POST | `/api/auth/register` | Register customer | — |
-| GET | `/api/vendors` | List vendors | — |
-| POST | `/api/vendors` | Register vendor | Customer |
-| POST | `/api/vendors/[id]/approve` | Approve/reject vendor | Admin |
-| GET | `/api/products` | List products | — |
-| POST | `/api/products` | Create product | Vendor |
-| GET | `/api/categories` | List categories | — |
-| POST | `/api/categories` | Create category | Admin |
-| POST | `/api/payments/webhook` | Payment webhook | Campay |
+- `TWILIO_AUTH_TOKEN` (SMS)
+- `RESEND_API_KEY` (Email)

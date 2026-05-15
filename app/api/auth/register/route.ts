@@ -9,6 +9,8 @@ const registerSchema = z.object({
     password: z.string().min(8),
     phone: z.string().optional(),
     role: z.enum(['CUSTOMER', 'VENDOR']).default('CUSTOMER'),
+    emailCode: z.string().length(6),
+    phoneCode: z.string().length(6),
 })
 
 export async function POST(req: NextRequest) {
@@ -23,7 +25,7 @@ export async function POST(req: NextRequest) {
             )
         }
 
-        const { name, email, password, phone, role } = parsed.data
+        const { name, email, password, phone, role, emailCode, phoneCode } = parsed.data
 
         // Check if user already exists
         const existingUser = await prisma.user.findUnique({ where: { email } })
@@ -32,6 +34,24 @@ export async function POST(req: NextRequest) {
                 { error: 'Email already registered' },
                 { status: 409 }
             )
+        }
+
+        // Validate Email OTP
+        const emailOTP = await prisma.verificationOTP.findUnique({
+            where: { identifier_type: { identifier: email, type: 'EMAIL' } }
+        })
+        if (!emailOTP || emailOTP.code !== emailCode || emailOTP.expiresAt < new Date()) {
+            return NextResponse.json({ error: 'Invalid or expired email verification code' }, { status: 400 })
+        }
+
+        // Validate Phone OTP
+        if (phone) {
+            const phoneOTP = await prisma.verificationOTP.findUnique({
+                where: { identifier_type: { identifier: phone, type: 'PHONE' } }
+            })
+            if (!phoneOTP || phoneOTP.code !== phoneCode || phoneOTP.expiresAt < new Date()) {
+                return NextResponse.json({ error: 'Invalid or expired phone verification code' }, { status: 400 })
+            }
         }
 
         // Hash password
@@ -46,11 +66,18 @@ export async function POST(req: NextRequest) {
                     password: hashedPassword,
                     phone,
                     role: role as any,
+                    emailVerified: new Date(),
+                    phoneVerified: phone ? new Date() : null,
                 },
             })
 
             await tx.customer.create({
                 data: { userId: newUser.id },
+            })
+
+            // Clean up used OTPs
+            await tx.verificationOTP.deleteMany({
+                where: { identifier: { in: [email, phone || ''] } }
             })
 
             return newUser

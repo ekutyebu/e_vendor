@@ -1,6 +1,5 @@
 import Link from 'next/link'
-import { LayoutDashboard, Users, Package, Tag, Settings, ArrowLeft, Store, Shield, Bell } from 'lucide-react'
-
+import { LayoutDashboard, Users, Package, Tag, Settings, ArrowLeft, Store, Shield, Bell, User } from 'lucide-react'
 
 export default function AdminDashboardLayout({
     children,
@@ -19,6 +18,7 @@ export default function AdminDashboardLayout({
         { icon: Tag, label: isFr ? 'Catégories' : 'Categories', href: `/${locale}/dashboard/admin/categories`, badge: null },
         { icon: Users, label: isFr ? 'Utilisateurs' : 'Users', href: `/${locale}/dashboard/admin/users`, badge: null },
         { icon: Settings, label: isFr ? 'Paramètres' : 'Settings', href: `/${locale}/dashboard/admin/settings`, badge: null },
+        { icon: User, label: isFr ? 'Profil Admin' : 'Admin Profile', href: `/${locale}/dashboard/admin/profile`, badge: null },
     ]
 
     return (
