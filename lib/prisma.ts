@@ -17,7 +17,7 @@ try {
     console.warn('⚠️ Could not load .env file:', e)
 }
 
-const connectionString = process.env.PROD_DATABASE_URL || process.env.DATABASE_URL
+const connectionString = (process.env.PROD_DATABASE_URL || process.env.DATABASE_URL)?.trim()
 
 if (!connectionString) {
     console.error('❌ CRITICAL: No database connection string found in process.env')
