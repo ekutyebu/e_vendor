@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import { PrismaNeon } from '@prisma/adapter-neon'
-import { Pool, neonConfig } from '@neon-database/serverless'
+import { Pool, neonConfig } from '@neondatabase/serverless'
 import ws from 'ws'
 
 // Allow Neon to work in local environments with WebSockets (bypasses port 5432)
