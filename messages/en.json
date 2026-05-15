@@ -10,6 +10,33 @@
         "cart": "Cart",
         "becomeVendor": "Become a Vendor"
     },
+    "becomeVendor": {
+        "hero": {
+            "title": "Sell on INOVAMARK",
+            "subtitle": "Join 500+ successful businesses. Zero commission for the first 3 months. Reach customers across Central Africa.",
+            "cta": "Start Selling Today"
+        },
+        "benefits": {
+            "title": "Why Sell With Us",
+            "feature1Title": "Massive Reach",
+            "feature1Desc": "Instantly reach thousands of active buyers across Cameroon and Central Africa.",
+            "feature2Title": "Easy Payments",
+            "feature2Desc": "Receive payments via Orange Money, MTN MoMo, or direct bank transfer — hassle-free.",
+            "feature3Title": "Smart Analytics",
+            "feature3Desc": "Track your sales, revenue, and customer behavior with your real-time vendor dashboard.",
+            "feature4Title": "Verified Badge",
+            "feature4Desc": "Get our trusted vendor badge to build customer confidence and drive more conversions."
+        },
+        "steps": {
+            "title": "Get Started in 3 Steps",
+            "step1Title": "Create Account",
+            "step1Desc": "Sign up and verify your identity with our secure 2-factor authentication system.",
+            "step2Title": "Apply as Vendor",
+            "step2Desc": "Submit your business details for admin review. Approval takes less than 24 hours.",
+            "step3Title": "Start Selling",
+            "step3Desc": "Upload your products, set your prices, and start receiving orders immediately."
+        }
+    },
     "hero": {
         "badge": "🌍 Central Africa's #1 Marketplace",
         "title": "Shop Local,",

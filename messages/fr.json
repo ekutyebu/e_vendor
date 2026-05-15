@@ -10,6 +10,33 @@
         "cart": "Panier",
         "becomeVendor": "Devenir Vendeur"
     },
+    "becomeVendor": {
+        "hero": {
+            "title": "Vendez sur INOVAMARK",
+            "subtitle": "Rejoignez 500+ entreprises prospères. Zéro commission les 3 premiers mois. Atteignez des clients à travers l'Afrique Centrale.",
+            "cta": "Commencer à Vendre"
+        },
+        "benefits": {
+            "title": "Pourquoi Vendre Avec Nous",
+            "feature1Title": "Grande Portée",
+            "feature1Desc": "Atteignez instantanément des milliers d'acheteurs actifs au Cameroun et en Afrique Centrale.",
+            "feature2Title": "Paiements Faciles",
+            "feature2Desc": "Recevez vos paiements via Orange Money, MTN MoMo, ou virement bancaire direct — sans tracas.",
+            "feature3Title": "Analytiques Intelligents",
+            "feature3Desc": "Suivez vos ventes, revenus et comportements clients avec votre tableau de bord en temps réel.",
+            "feature4Title": "Badge Vérifié",
+            "feature4Desc": "Obtenez notre badge vendeur de confiance pour renforcer la confiance des clients."
+        },
+        "steps": {
+            "title": "Démarrez en 3 Étapes",
+            "step1Title": "Créer un Compte",
+            "step1Desc": "Inscrivez-vous et vérifiez votre identité avec notre système d'authentification à 2 facteurs.",
+            "step2Title": "Candidater comme Vendeur",
+            "step2Desc": "Soumettez vos informations commerciales pour examen. L'approbation prend moins de 24h.",
+            "step3Title": "Commencer à Vendre",
+            "step3Desc": "Publiez vos produits, fixez vos prix et commencez à recevoir des commandes immédiatement."
+        }
+    },
     "hero": {
         "badge": "🌍 La Marketplace N°1 d'Afrique Centrale",
         "title": "Achetez Local,",
