@@ -17,7 +17,9 @@ try {
     console.warn('⚠️ Could not load .env file:', e)
 }
 
-const connectionString = (process.env.PROD_DATABASE_URL || process.env.DATABASE_URL || '').trim()
+const connectionString = (process.env.PROD_DATABASE_URL || process.env.DATABASE_URL || '')
+    .trim()
+    .replace(/^["']|["']$/g, '')
 
 if (!connectionString) {
     console.error('❌ CRITICAL: No database connection string found in process.env')
@@ -26,20 +28,15 @@ if (!connectionString) {
     console.log('🔗 Database connection string found (length:', connectionString.length, ')')
 }
 
-// Force standard postgres protocol if it uses postgresql:// (Neon pooler sometimes prefers postgres://)
-const normalizedConnectionString = connectionString.replace('postgresql://', 'postgres://')
+// Force standard postgres protocol and strip query parameters (like sslmode=require)
+const normalizedConnectionString = connectionString
+    .replace('postgresql://', 'postgres://')
+    .split('?')[0] // Neon serverless driver sometimes chokes on query parameters
 
 // Neon pool occasionally reads from process.env.DATABASE_URL automatically as a fallback.
 // Parse the URL manually to avoid Neon driver parsing issues
-const url = new URL(normalizedConnectionString)
-const pool = new Pool({ 
-    host: url.hostname,
-    user: url.username,
-    password: url.password,
-    database: url.pathname.slice(1),
-    port: url.port ? parseInt(url.port) : 5432,
-    ssl: true,
-})
+// Use standard connectionString property
+const pool = new Pool({ connectionString: normalizedConnectionString })
 const adapter = new PrismaNeon(pool)
 
 export const prisma =
