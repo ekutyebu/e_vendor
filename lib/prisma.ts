@@ -17,7 +17,7 @@ try {
     console.warn('⚠️ Could not load .env file:', e)
 }
 
-const connectionString = (process.env.PROD_DATABASE_URL || process.env.DATABASE_URL)?.trim()
+const connectionString = (process.env.PROD_DATABASE_URL || process.env.DATABASE_URL || '').trim()
 
 if (!connectionString) {
     console.error('❌ CRITICAL: No database connection string found in process.env')
@@ -26,7 +26,13 @@ if (!connectionString) {
     console.log('🔗 Database connection string found (length:', connectionString.length, ')')
 }
 
-const pool = new Pool({ connectionString })
+// Force standard postgres protocol if it uses postgresql:// (Neon pooler sometimes prefers postgres://)
+const normalizedConnectionString = connectionString.replace('postgresql://', 'postgres://')
+
+// Neon pool occasionally reads from process.env.DATABASE_URL automatically as a fallback.
+process.env.DATABASE_URL = normalizedConnectionString
+
+const pool = new Pool({ connectionString: normalizedConnectionString })
 const adapter = new PrismaNeon(pool)
 
 export const prisma =
