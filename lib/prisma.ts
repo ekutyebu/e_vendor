@@ -1,6 +1,10 @@
 import { PrismaClient } from '@prisma/client'
-import { PrismaNeonHTTP } from '@prisma/adapter-neon'
-import { neon } from '@neondatabase/serverless'
+import { PrismaNeon } from '@prisma/adapter-neon'
+import { neonConfig } from '@neondatabase/serverless'
+import ws from 'ws'
+
+// Allow Neon to work in local environments with WebSockets (bypasses port 5432)
+neonConfig.webSocketConstructor = ws
 
 // Load environment variables manually for standalone scripts (tsx)
 try {
@@ -16,8 +20,8 @@ const connectionString = (process.env.PROD_DATABASE_URL || process.env.DATABASE_
 // Ensure DATABASE_URL is available for the adapter and engine internals
 process.env.DATABASE_URL = connectionString
 
-// In Prisma 6, the adapter factory takes the connection string directly, NOT the instantiated sql function
-const adapter = new PrismaNeonHTTP(connectionString)
+// In Prisma 6, PrismaNeon takes the PoolConfig directly to handle Pool creation internally!
+const adapter = new PrismaNeon({ connectionString })
 
 export const prisma =
     globalThis.prisma ||
