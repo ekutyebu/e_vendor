@@ -21,6 +21,9 @@ const connectionString = process.env.PROD_DATABASE_URL || process.env.DATABASE_U
 
 if (!connectionString) {
     console.error('❌ CRITICAL: No database connection string found in process.env')
+    console.log('Available Env Keys:', Object.keys(process.env).filter(k => k.includes('DATABASE') || k.includes('URL')))
+} else {
+    console.log('🔗 Database connection string found (length:', connectionString.length, ')')
 }
 
 const pool = new Pool({ connectionString })
