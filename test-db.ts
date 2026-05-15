@@ -24,9 +24,12 @@ async function testConnection() {
     const pool = new Pool({ connectionString });
     
     try {
-        console.log('Attempting pool.query...');
-        const result = await pool.query('SELECT NOW()');
-        console.log('Success!', result.rows[0]);
+        console.log('Attempting pool.connect()...');
+        const client = await pool.connect();
+        console.log('Success connecting client!');
+        const result = await client.query('SELECT NOW()');
+        console.log('Success querying!', result.rows[0]);
+        client.release();
     } catch (err) {
         console.error('Connection failed:', err);
     } finally {

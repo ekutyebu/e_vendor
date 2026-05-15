@@ -1,10 +1,6 @@
 import { PrismaClient } from '@prisma/client'
-import { PrismaNeon } from '@prisma/adapter-neon'
-import { Pool, neonConfig } from '@neondatabase/serverless'
-import ws from 'ws'
-
-// Allow Neon to work in local environments with WebSockets (bypasses port 5432)
-neonConfig.webSocketConstructor = ws
+import { PrismaNeonHTTP } from '@prisma/adapter-neon'
+import { neon } from '@neondatabase/serverless'
 
 // Load environment variables manually for standalone scripts (tsx)
 try {
@@ -13,27 +9,16 @@ try {
         process.loadEnvFile('.env')
         console.log('✅ .env file loaded successfully via native Node.js')
     }
-} catch (e) {
-    console.warn('⚠️ Could not load .env file:', e)
-}
+} catch (e) {}
 
-const connectionString = (process.env.PROD_DATABASE_URL || process.env.DATABASE_URL || '')
-    .trim()
-    .replace(/^["']|["']$/g, '')
-
-if (!connectionString) {
-    console.error('❌ CRITICAL: No database connection string found in process.env')
-    console.log('Available Env Keys:', Object.keys(process.env).filter(k => k.includes('DATABASE') || k.includes('URL')))
-} else {
-    console.log('🔗 Database connection string found (length:', connectionString.length, ')')
-}
+const connectionString = (process.env.PROD_DATABASE_URL || process.env.DATABASE_URL || '').trim()
 
 // Ensure DATABASE_URL is available for the adapter and engine internals
 process.env.DATABASE_URL = connectionString
 
-// In test-db.ts, passing the raw connectionString directly worked perfectly!
-const pool = new Pool({ connectionString })
-const adapter = new PrismaNeon(pool)
+// Use the HTTP driver instead of WebSockets/Pool to bypass the connection string parsing bug
+const sql = neon(connectionString)
+const adapter = new PrismaNeonHTTP(sql)
 
 export const prisma =
     globalThis.prisma ||
