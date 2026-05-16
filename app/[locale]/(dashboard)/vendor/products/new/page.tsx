@@ -19,7 +19,7 @@ export default async function NewProductPage({ params }: { params: { locale: str
     })
 
     if (!vendor) {
-        redirect(`/${locale}/dashboard/vendor`)
+        redirect(`/${locale}/vendor`)
     }
 
     // Fetch categories for the form

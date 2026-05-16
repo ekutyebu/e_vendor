@@ -255,7 +255,7 @@ export default async function VendorOverviewPage({ params }: { params: { locale:
                 <div className="rounded-[3rem] bg-white dark:bg-[#111] border border-gray-100 dark:border-white/5 overflow-hidden flex flex-col">
                     <div className="p-8 border-b border-white/5 flex items-center justify-between">
                         <div className="text-[10px] font-black text-gray-900 dark:text-white uppercase tracking-[0.4em]">ORDER MANIFEST</div>
-                        <Link href={`/${params.locale}/dashboard/vendor/orders`} className="text-[10px] font-black text-primary uppercase tracking-widest hover:brightness-125 flex items-center gap-2">
+                        <Link href={`/${params.locale}/vendor/orders`} className="text-[10px] font-black text-primary uppercase tracking-widest hover:brightness-125 flex items-center gap-2">
                             ALL ORDERS <ArrowUpRight className="w-3 h-3" />
                         </Link>
                     </div>
@@ -292,7 +292,7 @@ export default async function VendorOverviewPage({ params }: { params: { locale:
                 <div className="rounded-[3rem] bg-white dark:bg-[#111] border border-gray-100 dark:border-white/5 overflow-hidden flex flex-col">
                     <div className="p-8 border-b border-white/5 flex items-center justify-between">
                         <div className="text-[10px] font-black text-gray-900 dark:text-white uppercase tracking-[0.4em]">PRODUCT LEVELS</div>
-                        <Link href={`/${params.locale}/dashboard/vendor/products`} className="text-[10px] font-black text-primary uppercase tracking-widest hover:brightness-125 flex items-center gap-2">
+                        <Link href={`/${params.locale}/vendor/products`} className="text-[10px] font-black text-primary uppercase tracking-widest hover:brightness-125 flex items-center gap-2">
                             INVENTORY <ArrowUpRight className="w-3 h-3" />
                         </Link>
                     </div>

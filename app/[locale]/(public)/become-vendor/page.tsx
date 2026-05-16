@@ -158,14 +158,16 @@ export default function BecomeVendorPage() {
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div className="p-8 border-2 border-dashed border-gray-200 dark:border-white/10 rounded-3xl flex flex-col items-center justify-center text-center gap-4 hover:border-orange-500/50 transition-colors cursor-pointer">
-                                        <Upload className="w-8 h-8 text-gray-400" />
-                                        <span className="text-[10px] font-black uppercase tracking-widest text-gray-500">ID Front Side</span>
-                                    </div>
-                                    <div className="p-8 border-2 border-dashed border-gray-200 dark:border-white/10 rounded-3xl flex flex-col items-center justify-center text-center gap-4 hover:border-orange-500/50 transition-colors cursor-pointer">
-                                        <Upload className="w-8 h-8 text-gray-400" />
-                                        <span className="text-[10px] font-black uppercase tracking-widest text-gray-500">ID Back Side</span>
-                                    </div>
+                                    <label className="p-8 border-2 border-dashed border-gray-200 dark:border-white/10 rounded-3xl flex flex-col items-center justify-center text-center gap-4 hover:border-orange-500/50 transition-colors cursor-pointer group">
+                                        <input type="file" className="hidden" accept="image/*" />
+                                        <Upload className="w-8 h-8 text-gray-400 group-hover:text-orange-500 transition-colors" />
+                                        <span className="text-[10px] font-black uppercase tracking-widest text-gray-500 group-hover:text-white">ID Front Side</span>
+                                    </label>
+                                    <label className="p-8 border-2 border-dashed border-gray-200 dark:border-white/10 rounded-3xl flex flex-col items-center justify-center text-center gap-4 hover:border-orange-500/50 transition-colors cursor-pointer group">
+                                        <input type="file" className="hidden" accept="image/*" />
+                                        <Upload className="w-8 h-8 text-gray-400 group-hover:text-orange-500 transition-colors" />
+                                        <span className="text-[10px] font-black uppercase tracking-widest text-gray-500 group-hover:text-white">ID Back Side</span>
+                                    </label>
                                 </div>
                             </div>
 
@@ -200,9 +202,10 @@ export default function BecomeVendorPage() {
                                     <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-gray-100 dark:border-white/5"></div></div>
                                     <span className="relative bg-white dark:bg-[#111] px-4 text-[10px] font-black text-gray-400">OR</span>
                                 </div>
-                                <Button variant="ghost" className="w-full h-14 rounded-2xl font-black uppercase tracking-widest text-[10px]">
+                                <label className="w-full h-14 rounded-2xl font-black uppercase tracking-widest text-[10px] flex items-center justify-center bg-transparent border-2 border-gray-100 dark:border-white/5 hover:bg-white/5 cursor-pointer transition-all">
+                                    <input type="file" className="hidden" accept="image/*" />
                                     Upload Photo
-                                </Button>
+                                </label>
                             </div>
 
                             <div className="flex gap-4">

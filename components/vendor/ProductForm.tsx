@@ -95,7 +95,7 @@ export default function ProductForm({ locale, categories, vendorId, initialData 
                 throw new Error(json.error || 'Failed to save product')
             }
 
-            router.push(`/${locale}/dashboard/vendor/products`)
+            router.push(`/${locale}/vendor/products`)
             router.refresh()
         } catch (err: any) {
             setError(err.message)
@@ -217,9 +217,17 @@ export default function ProductForm({ locale, categories, vendorId, initialData 
                             </button>
                         </div>
                     ))}
-                    <div className="w-24 h-24 rounded-2xl border-2 border-dashed border-gray-100 dark:border-white/5 flex items-center justify-center text-gray-500">
-                        <Upload className="w-6 h-6" />
-                    </div>
+                    <label className="w-24 h-24 rounded-2xl border-2 border-dashed border-gray-100 dark:border-white/5 flex items-center justify-center text-gray-500 hover:border-primary/50 cursor-pointer transition-all group">
+                        <input type="file" className="hidden" accept="image/*" multiple onChange={(e) => {
+                            // Mock file handling: just add a placeholder or log
+                            // In a real app, this would upload to Cloudinary/S3
+                            const file = e.target.files?.[0];
+                            if (file) {
+                                alert("File upload simulation: This would normally upload to a storage provider.");
+                            }
+                        }} />
+                        <Upload className="w-6 h-6 group-hover:text-primary transition-colors" />
+                    </label>
                 </div>
 
                 <div className="flex gap-4">

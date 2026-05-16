@@ -12,13 +12,13 @@ export default function AdminDashboardLayout({
     const isFr = locale === 'fr'
 
     const navItems = [
-        { icon: LayoutDashboard, label: isFr ? 'Vue d\'ensemble' : 'Overview', href: `/${locale}/dashboard/admin`, badge: null },
-        { icon: Store, label: isFr ? 'Vendeurs' : 'Vendors', href: `/${locale}/dashboard/admin/vendors`, badge: '3' },
-        { icon: Package, label: isFr ? 'Produits' : 'Products', href: `/${locale}/dashboard/admin/products`, badge: null },
-        { icon: Tag, label: isFr ? 'Catégories' : 'Categories', href: `/${locale}/dashboard/admin/categories`, badge: null },
-        { icon: Users, label: isFr ? 'Utilisateurs' : 'Users', href: `/${locale}/dashboard/admin/users`, badge: null },
-        { icon: Settings, label: isFr ? 'Paramètres' : 'Settings', href: `/${locale}/dashboard/admin/settings`, badge: null },
-        { icon: User, label: isFr ? 'Profil Admin' : 'Admin Profile', href: `/${locale}/dashboard/admin/profile`, badge: null },
+        { icon: LayoutDashboard, label: isFr ? 'Vue d\'ensemble' : 'Overview', href: `/${locale}/admin`, badge: null },
+        { icon: Store, label: isFr ? 'Vendeurs' : 'Vendors', href: `/${locale}/admin/vendors`, badge: '3' },
+        { icon: Package, label: isFr ? 'Produits' : 'Products', href: `/${locale}/admin/products`, badge: null },
+        { icon: Tag, label: isFr ? 'Catégories' : 'Categories', href: `/${locale}/admin/categories`, badge: null },
+        { icon: Users, label: isFr ? 'Utilisateurs' : 'Users', href: `/${locale}/admin/users`, badge: null },
+        { icon: Settings, label: isFr ? 'Paramètres' : 'Settings', href: `/${locale}/admin/settings`, badge: null },
+        { icon: User, label: isFr ? 'Profil Admin' : 'Admin Profile', href: `/${locale}/admin/profile`, badge: null },
     ]
 
     return (

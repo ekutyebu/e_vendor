@@ -31,7 +31,7 @@ export default async function VendorProductsPage({ params }: { params: { locale:
                     </p>
                 </div>
                 <Button asChild className="h-14 px-8 rounded-2xl gold-gradient text-black font-black uppercase tracking-widest text-[10px]">
-                    <Link href={`/${params.locale}/dashboard/vendor/settings`}>
+                    <Link href={`/${params.locale}/vendor/settings`}>
                         {isFr ? 'CONFIGURER LA BOUTIQUE' : 'CONFIGURE STOREFRONT'}
                     </Link>
                 </Button>
@@ -59,7 +59,7 @@ export default async function VendorProductsPage({ params }: { params: { locale:
                     </p>
                 </div>
                 <Button asChild className="h-14 px-8 rounded-2xl gold-gradient text-black font-black uppercase tracking-widest text-[11px] shadow-2xl shadow-primary/20 hover:scale-105 transition-all">
-                    <Link href={`/${params.locale}/dashboard/vendor/products/new`}>
+                    <Link href={`/${params.locale}/vendor/products/new`}>
                         <Plus className="w-4 h-4 mr-2" /> {isFr ? 'AJOUTER UN PRODUIT' : 'ADD NEW ASSET'}
                     </Link>
                 </Button>

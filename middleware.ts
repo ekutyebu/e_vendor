@@ -22,7 +22,7 @@ export default auth((req) => {
     const localeFreePathname = isLocalePrefix ? '/' + segments.slice(2).join('/') : pathname
 
     const isDashboardRoute = protectedRoutes.some((route) =>
-        localeFreePathname.startsWith(`/dashboard${route}`)
+        localeFreePathname === route || localeFreePathname.startsWith(`${route}/`)
     )
 
     if (isDashboardRoute) {
@@ -37,19 +37,19 @@ export default auth((req) => {
         const userRole = user?.role
 
         const isAdminRoute = adminRoutes.some((route) =>
-            localeFreePathname.startsWith(`/dashboard${route}`)
+            localeFreePathname === route || localeFreePathname.startsWith(`${route}/`)
         )
         if (isAdminRoute && userRole !== 'ADMIN') {
             const locale = isLocalePrefix ? maybeLocale : 'en'
-            return NextResponse.redirect(new URL(`/${locale}/dashboard/customer`, req.url))
+            return NextResponse.redirect(new URL(`/${locale}/customer`, req.url))
         }
 
         const isVendorRoute = vendorRoutes.some((route) =>
-            localeFreePathname.startsWith(`/dashboard${route}`)
+            localeFreePathname === route || localeFreePathname.startsWith(`${route}/`)
         )
         if (isVendorRoute && userRole !== 'VENDOR' && userRole !== 'ADMIN') {
             const locale = isLocalePrefix ? maybeLocale : 'en'
-            return NextResponse.redirect(new URL(`/${locale}/dashboard/customer`, req.url))
+            return NextResponse.redirect(new URL(`/${locale}/customer`, req.url))
         }
     }
 
