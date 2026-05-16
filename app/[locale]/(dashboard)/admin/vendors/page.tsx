@@ -71,7 +71,7 @@ export default async function AdminVendorsPage() {
                         <p className="text-xs font-bold text-green-600 italic">Verified</p>
                     </div>
                     <p className="text-sm font-bold text-muted-foreground uppercase tracking-wider">Verified Partners</p>
-                    <p className="text-3xl font-black">{vendors.filter(v => v.verified).length}</p>
+                    <p className="text-3xl font-black">{vendors.filter(v => v.onboardingStatus === 'APPROVED').length}</p>
                 </div>
                 <div className="bg-white dark:bg-white/5 border rounded-2xl p-6">
                     <div className="flex items-center justify-between mb-4">
@@ -81,7 +81,7 @@ export default async function AdminVendorsPage() {
                         <Badge variant="outline" className="text-yellow-600 border-yellow-200">Action Required</Badge>
                     </div>
                     <p className="text-sm font-bold text-muted-foreground uppercase tracking-wider">Pending Approval</p>
-                    <p className="text-3xl font-black">{vendors.filter(v => !v.verified).length}</p>
+                    <p className="text-3xl font-black">{vendors.filter(v => v.onboardingStatus === 'PENDING' || v.onboardingStatus === 'NEEDS_CORRECTION').length}</p>
                 </div>
             </div>
 
@@ -121,9 +121,17 @@ export default async function AdminVendorsPage() {
                                         </div>
                                     </td>
                                     <td className="px-6 py-4">
-                                        {vendor.verified ? (
+                                        {vendor.onboardingStatus === 'APPROVED' ? (
                                             <Badge className="bg-green-100 text-green-700 border-0 text-[10px] gap-1 font-bold">
                                                 <ShieldCheck className="w-3 h-3" /> VERIFIED
+                                            </Badge>
+                                        ) : vendor.onboardingStatus === 'REJECTED' ? (
+                                            <Badge className="bg-red-100 text-red-700 border-0 text-[10px] gap-1 font-bold">
+                                                <ShieldAlert className="w-3 h-3" /> REJECTED
+                                            </Badge>
+                                        ) : vendor.onboardingStatus === 'NEEDS_CORRECTION' ? (
+                                            <Badge className="bg-orange-100 text-orange-700 border-0 text-[10px] gap-1 font-bold">
+                                                <ShieldAlert className="w-3 h-3" /> CORRECTION
                                             </Badge>
                                         ) : (
                                             <Badge variant="outline" className="text-yellow-600 border-yellow-200 text-[10px] gap-1 font-bold bg-yellow-50">
@@ -150,15 +158,11 @@ export default async function AdminVendorsPage() {
                                     </td>
                                     <td className="px-6 py-4 text-right">
                                         <div className="flex items-center justify-end gap-2">
-                                            <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-blue-50 hover:text-blue-600 rounded-lg">
-                                                <Mail className="w-4 h-4" />
-                                            </Button>
-                                            <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-orange-50 hover:text-orange-600 rounded-lg">
-                                                <ExternalLink className="w-4 h-4" />
-                                            </Button>
-                                            <Button variant="ghost" size="icon" className="h-8 w-8 rounded-lg">
-                                                <MoreHorizontal className="w-4 h-4" />
-                                            </Button>
+                                            <Link href={`/${locale}/admin/vendors/${vendor.id}/review`}>
+                                                <Button variant="outline" size="sm" className="h-8 font-black text-[10px] uppercase tracking-widest gap-2">
+                                                    Review Application <ArrowRight className="w-3 h-3" />
+                                                </Button>
+                                            </Link>
                                         </div>
                                     </td>
                                 </tr>

@@ -27,7 +27,8 @@ model User {
 
   vendor          Vendor?
   customerProfile Customer?
-  reviews         Review[]
+  productReviews  ProductReview[]
+  vendorReviews   VendorReview[]
   cart            Cart?
   accounts        Account[]
   sessions        Session[]
@@ -100,12 +101,22 @@ model Vendor {
   coordinates     Json?
   deliveryRadius  Float    @default(10)
   baseDeliveryFee Float    @default(1000)
-  isActive        Boolean  @default(false)
-  verified        Boolean  @default(false)
-  rating          Float    @default(0)
-  totalReviews    Int      @default(0)
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  onboardingStatus OnboardingStatus @default(PENDING)
+  rejectionReason  String?
+  idType           String?   // National ID, Passport, Driving License
+  idNumber         String?
+  idFrontImage     String?
+  idBackImage      String?
+  facialScanImage  String?
+  taxId            String?
+  termsAccepted    Boolean   @default(false)
+  deliveryServices Json?     // Array of delivery types offered
+  paymentVerified  Boolean   @default(false)
+  isActive         Boolean   @default(false)
+  rating           Float     @default(0)
+  totalReviews     Int       @default(0)
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
 
   userId   String   @unique
   user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -113,7 +124,7 @@ model Vendor {
 
   products Product[]
   orders   Order[]
-  reviews  Review[]
+  vendorReviews VendorReview[]
 }
 
 model Category {
@@ -154,7 +165,7 @@ model Product {
   vendor     Vendor    @relation(fields: [vendorId], references: [id], onDelete: Cascade)
   category   Category  @relation(fields: [categoryId], references: [id])
   orderItems OrderItem[]
-  reviews    Review[]
+  reviews    ProductReview[]
   cartItems  CartItem[]
 }
 
@@ -207,7 +218,8 @@ model Customer {
   user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   orders  Order[]
   cart    Cart?
-  reviews Review[]
+  productReviews ProductReview[]
+  vendorReviews  VendorReview[]
 }
 
 model Cart {
@@ -235,7 +247,7 @@ model CartItem {
   @@unique([cartId, productId])
 }
 
-model Review {
+model ProductReview {
   id        String   @id @default(cuid())
   rating    Int
   comment   String?
@@ -243,15 +255,30 @@ model Review {
 
   customerId String
   productId  String
-  vendorId   String
   userId     String
 
   customer Customer @relation(fields: [customerId], references: [id])
   product  Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
-  vendor   Vendor   @relation(fields: [vendorId], references: [id])
   user     User     @relation(fields: [userId], references: [id])
 
   @@unique([customerId, productId])
+}
+
+model VendorReview {
+  id        String   @id @default(cuid())
+  rating    Int
+  comment   String?
+  createdAt DateTime @default(now())
+
+  customerId String
+  vendorId   String
+  userId     String
+
+  customer Customer @relation(fields: [customerId], references: [id])
+  vendor   Vendor   @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  user     User     @relation(fields: [userId], references: [id])
+
+  @@unique([customerId, vendorId])
 }
 
 enum UserRole {
@@ -263,6 +290,13 @@ enum UserRole {
 enum Language {
   ENGLISH
   FRENCH
+}
+
+enum OnboardingStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  NEEDS_CORRECTION
 }
 
 enum OrderStatus {
@@ -286,4 +320,5 @@ enum PaymentMethod {
   ORANGE_MONEY
   MOBILE_MONEY
   CASH_ON_DELIVERY
+  BANK_TRANSFER
 }
