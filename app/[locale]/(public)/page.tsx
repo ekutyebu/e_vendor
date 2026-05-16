@@ -116,7 +116,7 @@ export default async function HomePage() {
                         src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e12?w=1600&q=80" 
                         alt="Join Inova" 
                         fill 
-                        className="object-cover group-hover:scale-105 transition-transform duration-[10s]"
+                        className="object-cover group-hover:scale-105 transition-transform duration-[10000ms]"
                     />
                     <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent flex items-center p-12 lg:p-24">
                         <div className="max-w-xl space-y-6">
