@@ -80,9 +80,8 @@ export default function Header({
                         {/* Left Section: Logo & Deliver To */}
                         <div className="flex items-center gap-2 lg:gap-4">
                             {/* Logo */}
-                            <Link href={`/${locale}`} className="flex items-center gap-1 hover:outline hover:outline-1 hover:outline-white p-1 rounded transition-all">
-                                <span className="text-xl font-black tracking-tighter italic text-orange-500">INOVA</span>
-                                <span className="text-xl font-black tracking-tighter uppercase">MARK</span>
+                            <Link href={`/${locale}`} className="flex items-center hover:outline hover:outline-1 hover:outline-white p-1 rounded transition-all">
+                                <img src="/logo.png" alt="INOVAMARK" className="h-10 w-auto object-contain" />
                             </Link>
 
                             {/* Deliver To */}

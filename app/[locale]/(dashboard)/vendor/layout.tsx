@@ -47,13 +47,14 @@ export default function VendorDashboardLayout({
             {/* Elite Sidebar */}
             <aside className="hidden lg:flex w-[320px] bg-white dark:bg-[#111] border-r border-gray-100 dark:border-white/5 flex-col overflow-y-auto">
                 <div className="p-10">
-                    <Link href={`/${locale}`} className="flex items-center gap-3 group">
-                        <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center shadow-[0_0_20px_primary]">
-                            <Store className="w-6 h-6 text-black" />
+                    <Link href={`/${locale}/vendor`} className="flex flex-col gap-4 group">
+                        <img src="/logo.png" alt="INOVAMARK" className="h-10 w-auto object-contain" />
+                        <div className="flex items-center gap-2 px-1">
+                            <Sparkles className="w-4 h-4 text-primary" />
+                            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-500">
+                                {isFr ? 'ESPACE VENDEUR' : 'MERCHANT HUB'}
+                            </span>
                         </div>
-                        <span className="text-xl font-display font-black tracking-tighter uppercase italic text-gray-900 dark:text-white group-hover:text-primary transition-colors">
-                            INOVAMARK
-                        </span>
                     </Link>
                 </div>
 

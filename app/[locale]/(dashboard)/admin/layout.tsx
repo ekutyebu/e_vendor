@@ -26,19 +26,16 @@ export default function AdminDashboardLayout({
             {/* Sidebar */}
             <aside className="w-64 bg-gray-900 text-gray-300 flex flex-col">
                 {/* Logo */}
-                <div className="p-5 border-b border-gray-800">
-                    <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-lg gradient-brand flex items-center justify-center">
-                            <Store className="w-4 h-4 text-white" />
+                <div className="p-6 border-b border-gray-800">
+                    <Link href={`/${locale}/admin`} className="flex flex-col gap-2">
+                        <img src="/logo.png" alt="INOVAMARK" className="h-8 w-auto object-contain" />
+                        <div className="flex items-center gap-1.5 px-1">
+                            <Shield className="w-3 h-3 text-orange-500" />
+                            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">
+                                {isFr ? 'Commandement' : 'Central Command'}
+                            </span>
                         </div>
-                        <div>
-                            <div className="text-sm font-bold text-white">INOVAMARK</div>
-                            <div className="text-xs text-gray-500 flex items-center gap-1">
-                                <Shield className="w-3 h-3" />
-                                {isFr ? 'Admin' : 'Admin Panel'}
-                            </div>
-                        </div>
-                    </div>
+                    </Link>
                 </div>
 
                 {/* Nav */}
