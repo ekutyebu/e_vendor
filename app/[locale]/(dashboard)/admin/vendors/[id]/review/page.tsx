@@ -23,6 +23,7 @@ import ReviewActions from './ReviewActions'
 
 export default async function VendorReviewPage({ params }: { params: { id: string } }) {
     const locale = await getLocale()
+    const isFr = locale === 'fr'
     const session = await auth()
 
     if (!session?.user || session.user.role !== 'ADMIN') {
@@ -50,9 +51,11 @@ export default async function VendorReviewPage({ params }: { params: { id: strin
                         <ArrowLeft className="w-5 h-5" />
                     </Link>
                     <div>
-                        <h1 className="text-3xl font-black uppercase tracking-tighter italic">Review Application</h1>
-                        <p className="text-muted-foreground text-sm flex items-center gap-2">
-                            Vendor ID: <span className="font-mono text-xs">{vendor.id}</span>
+                        <h1 className="text-3xl font-black uppercase tracking-tighter italic">
+                            {isFr ? 'Examiner la Demande' : 'Review Application'}
+                        </h1>
+                        <p className="text-muted-foreground text-sm flex items-center gap-2 uppercase font-black tracking-widest text-[10px]">
+                            ID Vendeur: <span className="font-mono">{vendor.id}</span>
                         </p>
                     </div>
                 </div>
@@ -75,23 +78,23 @@ export default async function VendorReviewPage({ params }: { params: { id: strin
                     {/* Basic Info */}
                     <div className="bg-white dark:bg-[#111] rounded-[2.5rem] p-8 border border-gray-100 dark:border-white/5 shadow-sm space-y-8">
                         <h3 className="text-lg font-black uppercase tracking-tighter flex items-center gap-3 italic">
-                            <Building2 className="w-5 h-5 text-blue-500" /> Business Information
+                            <Building2 className="w-5 h-5 text-blue-500" /> {isFr ? 'Informations d\'Entreprise' : 'Business Information'}
                         </h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div className="space-y-1">
-                                <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Business Name</p>
+                                <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">{isFr ? 'Nom d\'entreprise' : 'Business Name'}</p>
                                 <p className="font-bold text-lg">{vendor.businessName}</p>
                             </div>
                             <div className="space-y-1">
                                 <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Category</p>
-                                <p className="font-bold">{vendor.category.name}</p>
+                                <p className="font-bold">{isFr ? vendor.category.nameFr : vendor.category.name}</p>
                             </div>
                             <div className="space-y-1">
-                                <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Owner / User</p>
+                                <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">{isFr ? 'Propriétaire' : 'Owner / User'}</p>
                                 <p className="font-bold">{vendor.user.name}</p>
                             </div>
                             <div className="space-y-1">
-                                <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Contact Email</p>
+                                <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Email</p>
                                 <p className="font-bold">{vendor.businessEmail}</p>
                             </div>
                             <div className="space-y-1">
@@ -101,8 +104,8 @@ export default async function VendorReviewPage({ params }: { params: { id: strin
                                 </p>
                             </div>
                             <div className="space-y-1">
-                                <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Tax ID</p>
-                                <p className="font-bold text-blue-600">{vendor.taxId || 'NOT PROVIDED'}</p>
+                                <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">{isFr ? 'ID Fiscal' : 'Tax ID'}</p>
+                                <p className="font-bold text-blue-600">{vendor.taxId || (isFr ? 'NON FOURNI' : 'NOT PROVIDED')}</p>
                             </div>
                         </div>
                     </div>
@@ -110,31 +113,35 @@ export default async function VendorReviewPage({ params }: { params: { id: strin
                     {/* Identity Verification */}
                     <div className="bg-white dark:bg-[#111] rounded-[2.5rem] p-8 border border-gray-100 dark:border-white/5 shadow-sm space-y-8">
                         <h3 className="text-lg font-black uppercase tracking-tighter flex items-center gap-3 italic">
-                            <ShieldCheck className="w-5 h-5 text-green-500" /> Identity Documents
+                            <ShieldCheck className="w-5 h-5 text-green-500" /> {isFr ? 'Documents d\'Identité' : 'Identity Documents'}
                         </h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="space-y-4">
-                                <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">ID Front Side ({vendor.idType})</p>
-                                <div className="aspect-[16/10] bg-gray-50 dark:bg-white/5 rounded-3xl relative overflow-hidden group">
+                                <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">
+                                    {isFr ? 'Recto de la pièce' : 'ID Front Side'} ({vendor.idType})
+                                </p>
+                                <div className="aspect-[16/10] bg-gray-50 dark:bg-white/5 rounded-3xl relative overflow-hidden group border border-gray-100 dark:border-white/5">
                                     {vendor.idFrontImage ? (
                                         <Image src={vendor.idFrontImage} alt="ID Front" fill className="object-cover" />
                                     ) : (
                                         <div className="absolute inset-0 flex flex-col items-center justify-center text-muted-foreground gap-2">
                                             <FileText className="w-10 h-10 opacity-20" />
-                                            <span className="text-[10px] font-black">DOCUMENT PREVIEW</span>
+                                            <span className="text-[10px] font-black">{isFr ? 'APERÇU DOCUMENT' : 'DOCUMENT PREVIEW'}</span>
                                         </div>
                                     )}
                                 </div>
                             </div>
                             <div className="space-y-4">
-                                <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">ID Back Side</p>
-                                <div className="aspect-[16/10] bg-gray-50 dark:bg-white/5 rounded-3xl relative overflow-hidden">
+                                <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">
+                                    {isFr ? 'Verso de la pièce' : 'ID Back Side'}
+                                </p>
+                                <div className="aspect-[16/10] bg-gray-50 dark:bg-white/5 rounded-3xl relative overflow-hidden border border-gray-100 dark:border-white/5">
                                     {vendor.idBackImage ? (
                                         <Image src={vendor.idBackImage} alt="ID Back" fill className="object-cover" />
                                     ) : (
                                         <div className="absolute inset-0 flex flex-col items-center justify-center text-muted-foreground gap-2">
                                             <FileText className="w-10 h-10 opacity-20" />
-                                            <span className="text-[10px] font-black">DOCUMENT PREVIEW</span>
+                                            <span className="text-[10px] font-black">{isFr ? 'APERÇU DOCUMENT' : 'DOCUMENT PREVIEW'}</span>
                                         </div>
                                     )}
                                 </div>
@@ -143,7 +150,9 @@ export default async function VendorReviewPage({ params }: { params: { id: strin
 
                         <div className="pt-8 border-t border-gray-100 dark:border-white/5">
                             <div className="space-y-4 text-center max-w-sm mx-auto">
-                                <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Biometric Match Check</p>
+                                <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">
+                                    {isFr ? 'Vérification Biométrique' : 'Biometric Match Check'}
+                                </p>
                                 <div className="aspect-square bg-gray-50 dark:bg-white/5 rounded-full relative overflow-hidden border-4 border-white dark:border-black shadow-xl">
                                     {vendor.facialScanImage ? (
                                         <Image src={vendor.facialScanImage} alt="Facial Scan" fill className="object-cover" />
@@ -155,7 +164,10 @@ export default async function VendorReviewPage({ params }: { params: { id: strin
                                     )}
                                 </div>
                                 <p className="text-xs text-muted-foreground font-medium italic">
-                                    Please verify that the facial scan matches the photo on the identity document provided.
+                                    {isFr 
+                                        ? 'Veuillez vérifier que le scan facial correspond à la photo sur le document d\'identité fourni.' 
+                                        : 'Please verify that the facial scan matches the photo on the identity document provided.'
+                                    }
                                 </p>
                             </div>
                         </div>
@@ -168,7 +180,7 @@ export default async function VendorReviewPage({ params }: { params: { id: strin
                     {/* Fulfillment Details */}
                     <div className="bg-white dark:bg-[#111] rounded-[2rem] p-6 border border-gray-100 dark:border-white/5 shadow-sm space-y-4">
                         <h3 className="text-sm font-black uppercase tracking-tighter flex items-center gap-2 italic">
-                            <Truck className="w-4 h-4 text-orange-500" /> Logistics
+                            <Truck className="w-4 h-4 text-orange-500" /> {isFr ? 'Logistique' : 'Logistics'}
                         </h3>
                         <div className="space-y-3">
                             <div className="flex flex-wrap gap-2">
@@ -177,7 +189,9 @@ export default async function VendorReviewPage({ params }: { params: { id: strin
                                         <Badge key={s} variant="outline" className="text-[9px] font-black border-orange-500/20 text-orange-600 bg-orange-500/5">{s}</Badge>
                                     ))
                                 ) : (
-                                    <p className="text-[10px] text-muted-foreground italic">No delivery services specified</p>
+                                    <p className="text-[10px] text-muted-foreground italic">
+                                        {isFr ? 'Aucun service de livraison spécifié' : 'No delivery services specified'}
+                                    </p>
                                 )}
                             </div>
                         </div>
@@ -188,6 +202,7 @@ export default async function VendorReviewPage({ params }: { params: { id: strin
                         vendorId={vendor.id} 
                         currentStatus={vendor.onboardingStatus} 
                         rejectionReason={vendor.rejectionReason}
+                        locale={locale}
                     />
 
                 </div>

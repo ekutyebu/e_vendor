@@ -6,6 +6,7 @@ export const authConfig = {
         signIn: '/signin',
         error: '/auth/error',
     },
+    session: { strategy: 'jwt' },
     callbacks: {
         authorized({ auth, request: { nextUrl } }) {
             const isLoggedIn = !!auth?.user

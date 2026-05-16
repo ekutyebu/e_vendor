@@ -1,121 +1,58 @@
-# INOVAMARK — Elite E-Commerce Architecture
+# INOVAMARK - Premium Multi-Vendor Marketplace
 
-> Central Africa's premier multi-vendor e-commerce platform. Engineered with enterprise-grade security, lightning-fast dynamic rendering, and seamless cross-border logistics.
+INOVAMARK is a high-security, professional e-commerce platform tailored for the Cameroonian market, featuring advanced merchant onboarding, manual verification workflows, and secure checkout.
 
-## ✨ Elite Features
+## 🚀 Key Features
 
-- 🌍 **Bilingual Native** — English & French (next-intl)
-- 🔐 **Dual-Factor Authentication (2FA)** — Mandatory Email and SMS verification for all accounts
-- 🏪 **Multi-Vendor Ecosystem** — Vendor registration with strict admin approval workflow
-- 💳 **Local & Global Payments** — Orange Money, MTN Mobile Money, Cash on Delivery (via Campay)
-- 📱 **Mobile-First Excellence** — Premium responsive design with skeleton loaders and dynamic suspense
-- 🛡️ **Role-Based Dashboards** — Segregated, ultra-secure profiles for Admins, Vendors, and Customers
-- 📦 **Global Logistics** — Haversine-based delivery routing algorithms
+### 🛡️ Advanced Security & Verification
+- **Rigorous Vendor Onboarding**: Multi-step verification including National ID/Passport uploads and Biometric (Facial) scans.
+- **Manual Admin Review**: Every merchant is manually verified by administrators before they can sell.
+- **Secure Checkout**: Authenticated-only checkout flow with support for MTN MoMo, Orange Money, and Bank Transfers.
 
-## 🛠 Tech Stack
+### 📊 Elite Merchant Dashboard
+- **Real-time Analytics**: Sales trajectory charts and user acquisition metrics.
+- **Performance Monitoring**: Track product ratings, stock levels, and customer satisfaction.
+- **Bilingual Support**: Full English and French support across all dashboards.
 
-| Layer | Technology |
-|-------|------|
-| **Core Framework** | Next.js 14 (App Router, Server Actions) |
-| **Language** | TypeScript (Strict Mode) |
-| **Database** | Neon Serverless PostgreSQL |
-| **ORM** | Prisma 6.19 (WebSocket Pools via `@neondatabase/serverless`) |
-| **Styling** | Tailwind CSS + Shadcn/UI |
-| **Authentication** | NextAuth.js v5 + Custom OTP Verification |
-| **i18n** | next-intl |
+### 🏛️ Central Command (Admin)
+- **Merchant Management**: Approve, reject, or request corrections on vendor applications with detailed feedback.
+- **Platform Overview**: Monitor total revenue, active users, and pending verification queues.
 
-## 🚀 Getting Started
+## 🛠️ Technology Stack
+- **Framework**: Next.js 14 (App Router)
+- **Language**: TypeScript
+- **Database**: PostgreSQL (Neon Serverless)
+- **ORM**: Prisma
+- **Auth**: NextAuth.js v5 (Auth.js)
+- **Styling**: Tailwind CSS with Premium Glassmorphism design
+- **I18n**: Next-intl
 
-### 1. Install dependencies
-```bash
-npm install
-```
+## 🚦 Getting Started
 
-### 2. Set up environment variables
-```bash
-cp .env.example .env.local
-```
-Ensure you have the following Elite keys configured:
-- `PROD_DATABASE_URL` (Neon Serverless Connection String)
-- `AUTH_SECRET` (For NextAuth session encryption)
-- `CAMPAY_USERNAME` & `CAMPAY_PASSWORD`
-- `RESEND_API_KEY` (For Email 2FA)
-- `TWILIO_ACCOUNT_SID` & `TWILIO_AUTH_TOKEN` (For SMS 2FA)
+1. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
 
-### 3. Initialize the Database
-```bash
-# Push the schema via TCP (Requires port 5432)
-npx prisma db push
+2. **Database Setup**:
+   ```bash
+   npx prisma generate
+   npx prisma db push
+   ```
 
-# Generate Prisma Client (WebSocket ready)
-npx prisma generate
+3. **Environment Variables**:
+   Create a `.env` file with `DATABASE_URL`, `AUTH_SECRET`, and `NEXTAUTH_URL`.
 
-# Seed the database sequentially
-npm run db:seed
-```
+4. **Run Development Server**:
+   ```bash
+   npm run dev
+   ```
 
-### 4. Run the development server
-```bash
-npm run dev
-```
+## 🌐 Access Links
+- **Marketplace**: `/en` or `/fr`
+- **Merchant Dashboard**: `/[locale]/vendor`
+- **Admin Command Center**: `/[locale]/admin`
+- **Onboarding**: `/[locale]/become-vendor`
 
-## 🔒 Confidentiality & Security Protocols
-
-This system handles sensitive financial and user identity data. 
-- All passwords are encrypted via `bcrypt` (12 rounds).
-- **No administrative bypass exists**. All admin access requires 2FA validation via authorized mobile devices.
-- Neon Database connections use `sslmode=require` and WebSocket WSS encryption.
-
-## 🧪 Demo Credentials (Development Only)
-
-> **WARNING:** Do not use these accounts in a production environment.
-
-| Role | Email | Password |
-|------|-------|----------|
-| **Super Admin** | `admin@inovamark.cm` | `Admin@2024!` |
-| **Master Vendor** | `marche.bio@gmail.com` | `Vendor@2024!` |
-| **Elite Customer**| `customer@example.cm` | `Customer@2024!` |
-
-*(Note: During development, the 2FA OTP codes are printed directly to the server terminal. In production, they are dispatched via Twilio/Resend).*
-
-## 📁 Elite Project Architecture
-
-```
-e-vendor/
-├── app/
-│   ├── [locale]/
-│   │   ├── (public)/      # Storefront (Home, Deals, Categories, Products)
-│   │   ├── (auth)/        # Registration & OTP 2FA Flows
-│   │   └── (dashboard)/   # Segregated Secure Zones
-│   │       ├── admin/     # Super Admin Control Center
-│   │       ├── vendor/    # Merchant Hub & Inventory
-│   │       └── customer/  # Shopper Profile & Orders
-│   └── api/               # Serverless Route Handlers
-├── components/
-│   ├── ui/                # Shadcn primitives (Skeletons, Buttons)
-│   └── shared/            # Mega Menu Header, Footer, Under Construction
-├── lib/
-│   ├── auth.ts            # Security configurations
-│   ├── prisma.ts          # Edge-compatible DB client
-│   └── payments/          # Transaction handlers
-├── messages/
-│   ├── en.json            # English translations
-│   └── fr.json            # French translations
-└── prisma/
-    └── schema.prisma      # DB schema (Includes OTP models)
-```
-
-## 🌐 Enterprise Deployment (Vercel)
-
-Ensure Vercel is configured to bypass build cache for database actions.
-
-```bash
-vercel --prod
-```
-
-Required Production Environment Variables:
-- `PROD_DATABASE_URL`
-- `PROD_DATABASE_URL_UNPOOLED`
-- `AUTH_SECRET`
-- `TWILIO_AUTH_TOKEN` (SMS)
-- `RESEND_API_KEY` (Email)
+---
+*Built with ❤️ for the next generation of Cameroonian commerce.*
